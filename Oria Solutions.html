@@ -1,0 +1,1718 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ORIA Solutions — Expertise SAP & S/4HANA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ice: #F2F4F6;
+    --ice-2: #E7EBEE;
+    --ink: #14171A;
+    --ink-soft: #2B3440;
+    --ink-mute: #6B7680;
+    --glacier: #5BC5E8;
+    --glacier-deep: #0B0F4A;
+    --navy: #0B0F4A;
+    --navy-bright: #1E2A9E;
+    --cyan: #5BC5E8;
+    --line: #D5DBE0;
+    --warn: #C8553D;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--ice);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.55;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  .serif { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; letter-spacing: -0.01em; }
+  .mono  { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ============ NAV ============ */
+  nav.top {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    padding: 20px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(242,244,246,0.72);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid transparent;
+    transition: border-color .3s;
+  }
+  nav.top.scrolled { border-bottom-color: var(--line); }
+  .brand { display: flex; align-items: baseline; gap: 10px; font-family: 'Instrument Serif', serif; font-size: 32px; letter-spacing: -0.02em; color: var(--navy); line-height: 1; }
+  .brand small { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.18em; color: var(--ink-mute); text-transform: uppercase; align-self: center; }
+  .brand-star {
+    width: 18px; height: 18px;
+    position: relative;
+    align-self: center;
+    flex-shrink: 0;
+    transform: translateY(-3px);
+  }
+  .brand-star svg { width: 100%; height: 100%; display: block; }
+
+  .menu { display: flex; gap: 34px; align-items: center; }
+  .menu a {
+    font-size: 13.5px; font-weight: 400; color: var(--ink-soft);
+    position: relative;
+    padding: 4px 0;
+    transition: color .2s;
+  }
+  .menu a:hover { color: var(--ink); }
+  .menu a::before {
+    content: attr(data-num);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; color: var(--ink-mute); margin-right: 6px;
+    vertical-align: super;
+  }
+  .menu a.cta {
+    background: var(--navy); color: var(--ice);
+    padding: 10px 18px; border-radius: 999px;
+    font-size: 13px;
+  }
+  .menu a.cta::before { display: none; }
+  .menu a.cta:hover { background: var(--navy-bright); }
+
+  /* ============ LAYOUT ============ */
+  section {
+    padding: 140px 40px;
+    position: relative;
+  }
+  .wrap { max-width: 1280px; margin: 0 auto; }
+  .wrap-narrow { max-width: 980px; margin: 0 auto; }
+
+  .sec-label {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 60px;
+    color: var(--ink-mute);
+  }
+  .sec-label .dot {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--navy);
+  }
+  .sec-label .num { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; }
+  .sec-label .name { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); }
+  .sec-label .line { flex: 1; height: 1px; background: var(--line); }
+
+  /* ============ HERO ============ */
+  .hero {
+    min-height: 100vh;
+    padding-top: 160px;
+    padding-bottom: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-meta {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    color: var(--ink-mute);
+  }
+  .hero-meta > div { display: flex; flex-direction: column; gap: 4px; }
+  .hero-meta .label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; }
+  .hero-meta .val { font-family: 'Instrument Serif', serif; font-size: 18px; color: var(--ink); }
+
+  .hero h1 {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-size: clamp(48px, 8.2vw, 132px);
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    max-width: 16ch;
+    margin-top: 80px;
+  }
+  .hero h1 em { font-style: italic; color: var(--navy); }
+
+  .hero-sub {
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: 1fr 1.3fr auto;
+    gap: 80px;
+    align-items: end;
+  }
+  .hero-sub p {
+    font-size: 17px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    max-width: 52ch;
+  }
+  .hero-sub .meta-stack { display: flex; flex-direction: column; gap: 8px; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 18px 26px 18px 30px;
+    background: var(--navy); color: var(--ice);
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: background .2s, transform .2s;
+    font-family: inherit;
+  }
+  .btn:hover { background: var(--navy-bright); transform: translateY(-1px); }
+  .btn .arrow {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--cyan);
+    color: var(--navy);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 14px;
+  }
+  .btn-ghost {
+    background: transparent; color: var(--ink);
+    border: 1px solid var(--line);
+  }
+  .btn-ghost:hover { background: var(--ink); color: var(--ice); border-color: var(--ink); }
+  .btn-ghost .arrow { background: var(--ink); color: var(--ice); }
+  .btn-ghost:hover .arrow { background: var(--glacier); color: var(--ink); }
+
+  /* Rink lines - hockey decoration */
+  .rink-lines {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+  .rink-lines svg { width: 100%; height: 100%; }
+
+  .faceoff {
+    position: absolute;
+    width: 180px; height: 180px;
+    border: 1px solid var(--navy);
+    border-radius: 50%;
+    opacity: 0.22;
+  }
+  .faceoff::before {
+    content: ''; position: absolute; inset: 40%;
+    border: 1px solid var(--navy);
+    border-radius: 50%;
+  }
+  .faceoff::after {
+    content: ''; position: absolute; inset: 50%;
+    width: 6px; height: 6px;
+    background: var(--navy); border-radius: 50%;
+    margin-left: -3px; margin-top: -3px;
+  }
+
+  /* Ticker */
+  /* Hero image slot */
+  .hero-image {
+    margin-top: 60px;
+    aspect-ratio: 21/9;
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    background:
+      repeating-linear-gradient(45deg,
+        transparent 0, transparent 18px,
+        rgba(168,197,214,0.12) 18px, rgba(168,197,214,0.12) 19px),
+      linear-gradient(180deg, var(--ice-2), var(--ice));
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .hero-image .slot-chip {
+    padding: 12px 20px;
+    border: 1px dashed var(--navy);
+    border-radius: 999px;
+    background: rgba(242,244,246,0.85);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+  }
+  .hero-image .corner {
+    position: absolute;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    padding: 14px 18px;
+  }
+  .hero-image .corner.tl { top: 0; left: 0; }
+  .hero-image .corner.tr { top: 0; right: 0; }
+  .hero-image .corner.bl { bottom: 0; left: 0; }
+  .hero-image .corner.br { bottom: 0; right: 0; }
+
+  /* Generic image slot for sections */
+  .img-slot {
+    aspect-ratio: 16/9;
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    background:
+      repeating-linear-gradient(45deg,
+        transparent 0, transparent 14px,
+        rgba(168,197,214,0.12) 14px, rgba(168,197,214,0.12) 15px),
+      linear-gradient(180deg, var(--ice-2), var(--ice));
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    margin: 40px 0 0;
+  }
+  .img-slot .chip {
+    padding: 12px 20px;
+    border: 1px dashed var(--navy);
+    border-radius: 999px;
+    background: rgba(242,244,246,0.85);
+  }
+  .img-slot .corner {
+    position: absolute;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    color: var(--ink-mute);
+    padding: 12px 16px;
+  }
+  .img-slot .corner.tl { top: 0; left: 0; }
+  .img-slot .corner.br { bottom: 0; right: 0; }
+
+  /* Dark variant for image slots on dark sections */
+  .expertises .img-slot {
+    border-color: rgba(255,255,255,0.15);
+    background:
+      repeating-linear-gradient(45deg,
+        transparent 0, transparent 14px,
+        rgba(168,197,214,0.08) 14px, rgba(168,197,214,0.08) 15px),
+      linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
+    color: rgba(255,255,255,0.55);
+  }
+  .expertises .img-slot .chip {
+    background: rgba(20,23,26,0.6);
+    border-color: var(--glacier);
+    color: rgba(255,255,255,0.75);
+  }
+  .expertises .img-slot .corner { color: rgba(255,255,255,0.4); }
+
+  .ticker {
+    margin-top: 60px;
+    border-top: 1px solid var(--line);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+  .ticker .period {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .ticker .period .pd {
+    color: var(--ink); background: var(--ice-2); padding: 4px 8px; border-radius: 4px;
+  }
+  .ticker .blink {
+    display: inline-block; width: 6px; height: 6px; background: var(--warn); border-radius: 50%;
+    animation: blink 1.4s infinite;
+    margin-right: 8px;
+  }
+  @keyframes blink { 50% { opacity: 0.2; } }
+
+  /* ============ APPROCHE ============ */
+  .approche-title {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-size: clamp(52px, 7.5vw, 120px);
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    max-width: 14ch;
+    margin-bottom: 32px;
+  }
+  .approche-title em { font-style: italic; color: var(--navy); }
+  .approche-intro {
+    font-size: 18px; line-height: 1.55; color: var(--ink-soft);
+    max-width: 56ch;
+    margin-bottom: 100px;
+  }
+
+  .play-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    border-top: 1px solid var(--line);
+    padding-top: 60px;
+  }
+  .play-card {
+    display: flex; flex-direction: column;
+    position: relative;
+    padding-right: 24px;
+  }
+  .play-card + .play-card { border-left: 1px solid var(--line); padding-left: 60px; padding-right: 0; }
+  .play-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.12em;
+    color: var(--ink-mute);
+    margin-bottom: 28px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .play-num::before {
+    content: ''; display: inline-block; width: 22px; height: 22px;
+    border: 1px solid var(--navy);
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--navy) 2px, transparent 3px);
+  }
+  .play-card h3 {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-size: 38px;
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    margin-bottom: 24px;
+    max-width: 18ch;
+  }
+  .play-card p {
+    color: var(--ink-soft);
+    font-size: 15.5px;
+    line-height: 1.6;
+    margin-bottom: 36px;
+    max-width: 42ch;
+  }
+  .chip-list {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-top: auto;
+  }
+  .chip {
+    padding: 7px 14px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    background: var(--ice);
+    transition: all .2s;
+  }
+  .chip:hover { background: var(--ink); color: var(--ice); border-color: var(--ink); }
+  .chip.solid { background: var(--ink); color: var(--ice); border-color: var(--ink); }
+
+  /* ============ EXPERTISES ============ */
+  .expertises { background: var(--ink); color: var(--ice); padding: 160px 40px; }
+  .expertises .sec-label { color: rgba(255,255,255,0.5); }
+  .expertises .sec-label .name { color: var(--ice); }
+  .expertises .sec-label .line { background: rgba(255,255,255,0.15); }
+  .expertises .sec-label .dot { background: var(--cyan); }
+
+  .exp-title {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-size: clamp(50px, 7vw, 116px);
+    line-height: 0.99;
+    letter-spacing: -0.025em;
+    max-width: 20ch;
+    margin-bottom: 32px;
+  }
+  .exp-title em { color: var(--cyan); font-style: italic; }
+  .exp-intro {
+    color: rgba(255,255,255,0.7);
+    font-size: 17px;
+    max-width: 56ch;
+    margin-bottom: 80px;
+  }
+
+  .period-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    margin-bottom: 120px;
+  }
+  .period-item {
+    padding: 40px 32px 40px 0;
+    border-right: 1px solid rgba(255,255,255,0.15);
+    position: relative;
+  }
+  .period-item:last-child { border-right: none; }
+  .period-item .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.14em;
+    color: var(--cyan);
+    margin-bottom: 40px;
+    display: block;
+  }
+  .period-item h4 {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+  .period-item p {
+    color: rgba(255,255,255,0.6);
+    font-size: 13.5px;
+  }
+
+  .deep-card {
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 4px;
+    padding: 56px 56px 48px;
+    margin-bottom: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 80px;
+    background: linear-gradient(180deg, rgba(168,197,214,0.03), transparent);
+  }
+  .deep-card .left h3 {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    margin-bottom: 24px;
+  }
+  .deep-card .left h3 em { color: var(--cyan); font-style: italic; }
+  .deep-card .left .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.14em;
+    color: var(--cyan);
+    margin-bottom: 24px;
+    display: block;
+  }
+  .deep-card .right {
+    color: rgba(255,255,255,0.75);
+    font-size: 15.5px;
+    line-height: 1.65;
+  }
+  .deep-card .right p + p { margin-top: 20px; }
+  .deep-card .right strong { color: var(--ice); font-weight: 500; }
+  .deep-card .right .tech-list {
+    margin-top: 28px;
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .deep-card .right .tech-list .chip {
+    background: rgba(255,255,255,0.04);
+    color: var(--ice);
+    border-color: rgba(255,255,255,0.15);
+  }
+  .deep-card .right .tech-list .chip:hover {
+    background: var(--cyan); color: var(--navy); border-color: var(--cyan);
+  }
+
+  /* ============ IA ============ */
+  .ia { padding: 160px 40px; }
+  .ia-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    align-items: start;
+  }
+  .ia h2 {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-size: clamp(48px, 6.5vw, 104px);
+    line-height: 1;
+    letter-spacing: -0.025em;
+    max-width: 16ch;
+  }
+  .ia h2 em { font-style: italic; color: var(--navy); }
+  .ia .body p {
+    font-size: 17px; color: var(--ink-soft); line-height: 1.6;
+    max-width: 50ch;
+  }
+  .ia-steps {
+    margin-top: 48px;
+    counter-reset: ia;
+  }
+  .ia-step {
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    gap: 24px;
+    align-items: center;
+    padding: 22px 0;
+    border-top: 1px solid var(--line);
+    counter-increment: ia;
+    transition: padding .3s;
+    cursor: default;
+  }
+  .ia-step:last-child { border-bottom: 1px solid var(--line); }
+  .ia-step:hover { padding-left: 12px; }
+  .ia-step::before {
+    content: "0" counter(ia);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-mute);
+    letter-spacing: 0.1em;
+  }
+  .ia-step .title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 24px;
+    line-height: 1.1;
+  }
+  .ia-step .arr {
+    width: 28px; height: 28px; border-radius: 50%;
+    border: 1px solid var(--line);
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--ink-mute);
+    font-size: 11px;
+    transition: all .2s;
+  }
+  .ia-step:hover .arr { background: var(--navy); border-color: var(--navy); color: var(--ice); }
+
+  /* ============ RÉFÉRENCES ============ */
+  .refs { background: var(--ice-2); padding: 160px 40px; }
+  .refs h2 {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-size: clamp(52px, 7.5vw, 120px);
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    max-width: 18ch;
+    margin-bottom: 80px;
+  }
+  .refs h2 em { font-style: italic; color: var(--navy); }
+
+  .testi-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 120px;
+  }
+  .testi {
+    background: var(--ice);
+    padding: 48px 48px 40px;
+    border-radius: 4px;
+    display: flex; flex-direction: column;
+    min-height: 340px;
+    position: relative;
+    border: 1px solid transparent;
+    transition: border-color .2s;
+  }
+  .testi:hover { border-color: var(--line); }
+  .testi-logo {
+    height: 64px;
+    margin-bottom: auto;
+    display: flex; align-items: center;
+    gap: 18px;
+  }
+  .testi-logo-slot {
+    width: 64px; height: 64px;
+    border: 1px dashed var(--line);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    background:
+      repeating-linear-gradient(45deg,
+        transparent 0, transparent 6px,
+        rgba(168,197,214,0.18) 6px, rgba(168,197,214,0.18) 7px);
+    position: relative;
+    flex-shrink: 0;
+    color: var(--ink-mute);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.2;
+  }
+  .testi-logo-name {
+    font-family: 'Instrument Serif', serif;
+    font-size: 28px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    display: flex; flex-direction: column; line-height: 1.1;
+  }
+  .testi-logo-name small {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-top: 4px;
+  }
+  .testi blockquote {
+    font-family: 'Instrument Serif', serif;
+    font-size: 26px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin-top: 40px;
+    margin-bottom: 32px;
+    color: var(--ink);
+  }
+  .testi blockquote::before {
+    content: '"';
+    font-size: 60px;
+    color: var(--navy);
+    line-height: 0;
+    vertical-align: -10px;
+    margin-right: 4px;
+  }
+  .testi cite {
+    font-style: normal;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr) 1.4fr;
+    gap: 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .stat {
+    padding: 48px 28px;
+    border-right: 1px solid var(--line);
+  }
+  .stat:last-child { border-right: none; }
+  .stat .num {
+    font-family: 'Instrument Serif', serif;
+    font-size: 64px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+  .stat .num em { font-style: italic; color: var(--navy); }
+  .stat .label {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.4;
+    max-width: 18ch;
+  }
+  .stat.wide .num { font-size: 22px; line-height: 1.3; font-family: 'Instrument Serif', serif; letter-spacing: -0.01em; max-width: none; }
+  .stat.wide .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    color: var(--ink-mute);
+  }
+
+  /* ============ ÉQUIPE ============ */
+  .team { padding: 160px 40px; }
+  .team h2 {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-size: clamp(52px, 7.5vw, 120px);
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    max-width: 14ch;
+    margin-bottom: 80px;
+  }
+  .team h2 em { font-style: italic; color: var(--navy); }
+
+  .duo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    margin-bottom: 100px;
+  }
+  .player {
+    display: flex; flex-direction: column;
+  }
+  .portrait {
+    aspect-ratio: 4/5;
+    background: linear-gradient(180deg, var(--ice-2), var(--ice));
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 32px;
+    display: flex; align-items: flex-end; justify-content: space-between;
+    padding: 28px;
+    border: 1px solid var(--line);
+  }
+  .portrait::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(45deg,
+        transparent 0,
+        transparent 14px,
+        rgba(11,15,74,0.06) 14px,
+        rgba(11,15,74,0.06) 15px);
+  }
+  .portrait-slot {
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -60%);
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    border: 1px dashed var(--navy);
+    background: rgba(242,244,246,0.6);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.3;
+  }
+  .portrait-slot::after {
+    content: '';
+    position: absolute; inset: -8px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    opacity: 0.6;
+  }
+  .jersey {
+    position: relative;
+    font-family: 'Instrument Serif', serif;
+    font-size: 72px;
+    line-height: 1;
+    color: var(--ink);
+    opacity: 0.9;
+  }
+  .portrait-dims {
+    position: relative;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    text-align: right;
+    line-height: 1.4;
+  }
+  .portrait-caption {
+    position: absolute;
+    bottom: 20px; left: 28px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+  }
+  .player-role {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: 14px;
+  }
+  .player-name {
+    font-family: 'Instrument Serif', serif;
+    font-size: 44px;
+    line-height: 1;
+    letter-spacing: -0.015em;
+    margin-bottom: 8px;
+  }
+  .player-tag {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--navy);
+    margin-bottom: 18px;
+  }
+  .player-sub {
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin-bottom: 22px;
+    font-weight: 500;
+  }
+  .player-text {
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+  }
+  .player-text strong { color: var(--ink); font-weight: 500; }
+
+  .team-conclusion {
+    border-top: 1px solid var(--line);
+    padding-top: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 60px;
+  }
+  .team-conclusion p {
+    font-family: 'Instrument Serif', serif;
+    font-size: 38px;
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    max-width: 20ch;
+  }
+  .team-conclusion p em { font-style: italic; color: var(--navy); }
+  .team-conclusion .mono { color: var(--ink-mute); white-space: nowrap; }
+
+  /* ============ CONTACT ============ */
+  .contact {
+    background: var(--ink);
+    color: var(--ice);
+    padding: 160px 40px;
+  }
+  .contact .sec-label { color: rgba(255,255,255,0.5); }
+  .contact .sec-label .name { color: var(--ice); }
+  .contact .sec-label .line { background: rgba(255,255,255,0.15); }
+  .contact .sec-label .dot { background: var(--cyan); }
+
+  .contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    align-items: start;
+  }
+  .contact h2 {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-size: clamp(52px, 7.5vw, 116px);
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    max-width: 14ch;
+  }
+  .contact h2 em { font-style: italic; color: var(--cyan); }
+  .contact .lead {
+    color: rgba(255,255,255,0.7);
+    font-size: 17px;
+    margin-top: 32px;
+    max-width: 44ch;
+    line-height: 1.6;
+  }
+  .contact-details {
+    margin-top: 56px;
+    display: flex; flex-direction: column; gap: 18px;
+  }
+  .contact-details .row {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 24px;
+    padding: 16px 0;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    font-size: 15px;
+  }
+  .contact-details .row .k {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.14em;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    padding-top: 2px;
+  }
+  .contact-details .row .v { color: var(--ice); }
+
+  form.oria-form {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 40px;
+    border-radius: 4px;
+    display: flex; flex-direction: column; gap: 20px;
+  }
+  form.oria-form label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    display: block;
+    margin-bottom: 8px;
+  }
+  form.oria-form input, form.oria-form textarea, form.oria-form select {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255,255,255,0.18);
+    color: var(--ice);
+    font-family: inherit;
+    font-size: 15px;
+    padding: 6px 0 12px;
+    outline: none;
+    transition: border-color .2s;
+  }
+  form.oria-form input:focus, form.oria-form textarea:focus, form.oria-form select:focus {
+    border-bottom-color: var(--cyan);
+  }
+  form.oria-form textarea { resize: vertical; min-height: 80px; }
+  form.oria-form select { appearance: none; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23ccc' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 4px center; }
+  form.oria-form option { background: var(--ink); color: var(--ice); }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .submit-row { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; }
+  .submit-note { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; color: rgba(255,255,255,0.4); text-transform: uppercase; }
+  .btn-ice {
+    background: var(--ice); color: var(--ink);
+    padding: 16px 24px; border-radius: 999px;
+    border: none; font-family: inherit; font-size: 14px; font-weight: 500;
+    display: inline-flex; align-items: center; gap: 12px;
+    cursor: pointer; transition: all .2s;
+  }
+  .btn-ice:hover { background: var(--cyan); }
+  .btn-ice .arrow { background: var(--ink); color: var(--ice); width: 26px; height: 26px; border-radius: 50%; display:inline-flex; align-items:center; justify-content:center; font-size: 13px; }
+
+  /* ============ FAQ ============ */
+  .faq { padding: 160px 40px; }
+  .faq-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 100px;
+    align-items: start;
+  }
+  .faq h2 {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-size: clamp(50px, 7vw, 104px);
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    max-width: 10ch;
+  }
+  .faq h2 em { font-style: italic; color: var(--navy); }
+  .faq .side-note {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px; letter-spacing: 0.14em;
+    color: var(--ink-mute);
+    margin-top: 28px;
+    text-transform: uppercase;
+    line-height: 1.8;
+  }
+  .faq-list { display: flex; flex-direction: column; }
+  .faq-item {
+    border-top: 1px solid var(--line);
+    padding: 28px 0;
+    cursor: pointer;
+  }
+  .faq-item:last-child { border-bottom: 1px solid var(--line); }
+  .faq-q {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 40px;
+  }
+  .faq-q .question {
+    font-family: 'Instrument Serif', serif;
+    font-size: 26px;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    transition: color .2s;
+  }
+  .faq-item:hover .question { color: var(--navy); }
+  .faq-q .plus {
+    flex: 0 0 32px; width: 32px; height: 32px; border-radius: 50%;
+    border: 1px solid var(--line);
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--ink);
+    font-size: 14px;
+    transition: transform .3s, background .2s;
+  }
+  .faq-item.open .plus { transform: rotate(45deg); background: var(--ink); color: var(--ice); border-color: var(--ink); }
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .4s ease;
+    color: var(--ink-soft);
+    font-size: 15.5px;
+    line-height: 1.65;
+  }
+  .faq-item.open .faq-a { max-height: 200px; margin-top: 18px; }
+
+  /* ============ FOOTER ============ */
+  footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.6);
+    padding: 60px 40px 40px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 40px;
+    max-width: 1280px; margin: 0 auto;
+    padding-bottom: 60px;
+  }
+  .footer-inner .col h5 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+  .footer-inner .col a { display: block; color: var(--ice); font-size: 14px; margin-bottom: 10px; }
+  .footer-inner .col a:hover { color: var(--cyan); }
+  .footer-inner .col p { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.6; }
+  .footer-bottom {
+    max-width: 1280px; margin: 0 auto;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex; justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+  }
+  .footer-mega {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(80px, 16vw, 220px);
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    color: rgba(255,255,255,0.1);
+    padding: 0 40px 20px;
+    max-width: 1280px; margin: 0 auto;
+    overflow: hidden;
+  }
+
+  /* ============ TWEAKS PANEL ============ */
+  #tweaks {
+    position: fixed; bottom: 24px; right: 24px; z-index: 100;
+    background: var(--ice);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 20px;
+    width: 260px;
+    box-shadow: 0 20px 50px rgba(20,23,26,0.12);
+    font-size: 13px;
+    display: none;
+  }
+  #tweaks.open { display: block; }
+  #tweaks h5 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+  #tweaks .tw-row { margin-bottom: 14px; }
+  #tweaks .tw-row label {
+    display: block; font-size: 11px; color: var(--ink-mute); margin-bottom: 6px;
+    font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  #tweaks .swatches { display: flex; gap: 6px; }
+  #tweaks .sw {
+    width: 28px; height: 28px; border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: transform .15s;
+  }
+  #tweaks .sw.active { border-color: var(--ink); }
+  #tweaks .sw:hover { transform: scale(1.1); }
+  #tweaks .seg { display: flex; border: 1px solid var(--line); border-radius: 999px; padding: 3px; }
+  #tweaks .seg button {
+    flex: 1; padding: 6px 10px; border: none; background: transparent;
+    font-size: 11px; cursor: pointer; border-radius: 999px;
+    font-family: inherit; color: var(--ink-soft);
+  }
+  #tweaks .seg button.active { background: var(--ink); color: var(--ice); }
+
+  /* compact mode */
+  body.compact section { padding: 100px 40px; }
+  body.compact .hero { min-height: auto; padding-top: 140px; padding-bottom: 60px; }
+  body.compact .hero h1 { margin-top: 50px; font-size: clamp(44px, 6.5vw, 104px); }
+  body.compact .ticker { margin-top: 60px; }
+  body.compact .approche-intro { margin-bottom: 60px; }
+  body.compact .exp-intro { margin-bottom: 50px; }
+  body.compact .period-row { margin-bottom: 70px; }
+  body.compact .testi-grid { margin-bottom: 70px; }
+  body.compact .duo { margin-bottom: 60px; }
+
+  /* low hockey */
+  body.low-hockey .mono.hockey-term { display: none; }
+  body.low-hockey .faceoff { display: none; }
+  body.low-hockey .jersey { opacity: 0; }
+  body.low-hockey .player-tag::before { content: ''; }
+
+  @media (max-width: 960px) {
+    nav.top { padding: 16px 20px; }
+    .menu { display: none; }
+    .menu .cta { display: inline-flex; }
+    section { padding: 100px 20px; }
+    .hero { padding-top: 120px; }
+    .hero-sub { grid-template-columns: 1fr; gap: 40px; }
+    .play-grid { grid-template-columns: 1fr; gap: 40px; }
+    .play-card + .play-card { border-left: none; border-top: 1px solid var(--line); padding-left: 0; padding-top: 40px; }
+    .period-row { grid-template-columns: 1fr 1fr; }
+    .period-item { padding: 30px 20px 30px 0; }
+    .deep-card { grid-template-columns: 1fr; gap: 30px; padding: 32px; }
+    .ia-layout, .contact-layout, .faq-layout { grid-template-columns: 1fr; gap: 40px; }
+    .testi-grid, .duo { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: 1fr 1fr; }
+    .footer-inner { grid-template-columns: 1fr 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body data-screen-label="01 Oria Home">
+
+<!-- ====== NAV ====== -->
+<nav class="top" id="nav">
+  <div class="brand">
+    <span class="brand-star" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z" fill="#0B0F4A"/>
+      </svg>
+    </span>
+    Oria <small>Solutions</small>
+  </div>
+  <div class="menu">
+    <a href="#approche" data-num="01">Approche</a>
+    <a href="#expertises" data-num="02">Expertises</a>
+    <a href="#ia" data-num="03">IA</a>
+    <a href="#refs" data-num="04">Références</a>
+    <a href="#team" data-num="05">Équipe</a>
+    <a href="#contact" class="cta">Nous contacter →</a>
+  </div>
+</nav>
+
+<!-- ====== HERO ====== -->
+<section class="hero" data-screen-label="Hero">
+  <div class="faceoff" style="top: 18%; right: -60px;"></div>
+  <div class="faceoff" style="bottom: 8%; left: -90px; width: 260px; height: 260px;"></div>
+
+  <div class="hero-meta">
+    <div>
+      <span class="label">Saison 2026</span>
+      <span class="val">Onzième année sur la glace</span>
+    </div>
+    <div>
+      <span class="label">Terrain</span>
+      <span class="val">Industrie · SAP · S/4HANA</span>
+    </div>
+    <div>
+      <span class="label">Formation</span>
+      <span class="val">Duo expert — fonctionnel + technique</span>
+    </div>
+  </div>
+
+  <h1>
+    Nous faisons avancer vos projets SAP avec précision, engagement et <em>sens du jeu collectif.</em>
+  </h1>
+
+  <div class="hero-sub">
+    <span class="mono">— Manifeste</span>
+    <p>
+      Expertise fonctionnelle, développement sur mesure, vision terrain&nbsp;: ORIA Solutions accompagne les entreprises industrielles à chaque étape de leurs projets SAP &amp; S/4HANA, avec une approche humaine, exigeante et adaptée à la réalité du terrain.
+    </p>
+    <a class="btn" href="#contact">Nous contacter <span class="arrow">→</span></a>
+  </div>
+
+  <div class="hero-image">
+    <span class="corner tl">IMG_HERO · 21:9</span>
+    <span class="corner tr">À fournir</span>
+    <span class="slot-chip">Photo d'ambiance — équipe, terrain, glace</span>
+    <span class="corner bl">Haute résolution</span>
+    <span class="corner br">Hero · 2400×1029 px</span>
+  </div>
+
+  <div class="ticker">
+    <div class="period"><span class="blink"></span>En jeu — disponible pour nouveaux matchs T2 2026</div>
+    <div class="period"><span class="pd">P1</span> Lecture métier</div>
+    <div class="period"><span class="pd">P2</span> Développement</div>
+    <div class="period"><span class="pd">P3</span> IA &amp; BTP</div>
+    <div>Basé à Strasbourg — interventions internationales</div>
+  </div>
+</section>
+
+<!-- ====== APPROCHE ====== -->
+<section id="approche" data-screen-label="02 Approche">
+  <div class="wrap">
+    <div class="sec-label">
+      <span class="dot"></span>
+      <span class="num">§ 01</span>
+      <span class="name">Approche</span>
+      <span class="line"></span>
+      <span class="mono">— Notre méthode</span>
+    </div>
+
+    <h2 class="approche-title">Notre <em>terrain</em> de jeu.</h2>
+    <p class="approche-intro">
+      De l'analyse métier au développement technique, ORIA Solutions intervient là où il faut, avec le bon niveau d'expertise et le bon tempo.
+    </p>
+
+    <div class="play-grid">
+      <div class="play-card">
+        <div class="play-num">PLAY 01 — Fonctionnel</div>
+        <h3>Lecture métier &amp; expertise fonctionnelle</h3>
+        <p>
+          Spécialisée sur les modules <strong>QM</strong> et <strong>eWM</strong>, ORIA Solutions accompagne les équipes dans l'analyse de leurs processus, la compréhension des irritants terrain et la traduction des besoins métier dans SAP.
+        </p>
+        <div class="chip-list">
+          <span class="chip">Analyse des besoins métier</span>
+          <span class="chip">Cadrage fonctionnel</span>
+          <span class="chip">Ateliers &amp; workshops sur-mesure</span>
+          <span class="chip solid">QM</span>
+          <span class="chip solid">eWM</span>
+          <span class="chip solid">S/4HANA</span>
+        </div>
+      </div>
+      <div class="play-card">
+        <div class="play-num">PLAY 02 — Technique</div>
+        <h3>Développement SAP sur mesure</h3>
+        <p>
+          SAP propose un cadre robuste, mais chaque environnement industriel a ses spécificités. Lorsque le standard atteint ses limites, nous concevons des développements sur mesure.
+        </p>
+        <div class="chip-list">
+          <span class="chip">Développements custom</span>
+          <span class="chip">Adaptation de l'existant</span>
+          <span class="chip">Nouvelles fonctionnalités</span>
+          <span class="chip">Solutions maintenables</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== EXPERTISES ====== -->
+<section class="expertises" id="expertises" data-screen-label="03 Expertises">
+  <div class="wrap">
+    <div class="sec-label">
+      <span class="dot"></span>
+      <span class="num">§ 02</span>
+      <span class="name">Expertises</span>
+      <span class="line"></span>
+      <span class="mono">— Le déroulé</span>
+    </div>
+
+    <h2 class="exp-title">Notre méthode&nbsp;: de la lecture du terrain à la <em>mise en œuvre.</em></h2>
+    <p class="exp-intro">
+      Un bon projet SAP, ce n'est pas une suite de slides. C'est un enchaînement fluide entre compréhension, décision, exécution et amélioration continue.
+    </p>
+
+    <div class="period-row">
+      <div class="period-item">
+        <span class="num">P1 · 01</span>
+        <h4>Observer</h4>
+        <p>Prendre la température du terrain</p>
+      </div>
+      <div class="period-item">
+        <span class="num">P2 · 02</span>
+        <h4>Cadrer</h4>
+        <p>Poser la bonne stratégie</p>
+      </div>
+      <div class="period-item">
+        <span class="num">P3 · 03</span>
+        <h4>Déployer</h4>
+        <p>Passer à l'action</p>
+      </div>
+      <div class="period-item">
+        <span class="num">OT · 04</span>
+        <h4>Faire durer</h4>
+        <p>Rester dans le match sur la durée</p>
+      </div>
+    </div>
+
+    <div class="deep-card">
+      <div class="left">
+        <span class="tag">— Au cœur de l'ERP</span>
+        <h3>L'excellence <em>S/4HANA.</em></h3>
+      </div>
+      <div class="right">
+        <p>
+          <strong>Conviction&nbsp;:</strong> la technologie n'a de sens que si elle facilite le quotidien de l'utilisateur métier. La quasi-totalité de vos flux critiques se déroulent dans S/4HANA&nbsp;: nous vous accompagnons sur l'implémentation et l'optimisation de vos processus QM et eWM, en tirant parti des standards SAP les plus récents.
+        </p>
+        <p>
+          Pour éviter l'ancien code complexe et coûteux à maintenir, nous privilégions une approche moderne, et exploitons le Machine Learning embarqué quand il apporte un gain concret — ERP plus intelligent et réactif.
+        </p>
+        <div class="tech-list">
+          <span class="chip">RAP (RESTful ABAP)</span>
+          <span class="chip">Modélisation CDS</span>
+          <span class="chip">Applications Fiori natives</span>
+          <span class="chip">ML embarqué</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="img-slot">
+      <span class="corner tl">IMG_EXP · 16:9</span>
+      <span class="corner br">À fournir</span>
+      <span class="chip">Photo — écran SAP, atelier ou terrain industriel</span>
+    </div>
+
+    <div class="deep-card">
+      <div class="left">
+        <span class="tag">— Autour de l'ERP</span>
+        <h3>L'agilité avec <em>SAP BTP</em> (Cloud).</h3>
+      </div>
+      <div class="right">
+        <p>
+          Pour répondre à vos besoins spécifiques <strong>sans modifier le standard S/4HANA</strong> (stratégie Clean Core), nous concevons des extensions sur SAP BTP&nbsp;: Pro-Code via Business Application Studio, applications mobiles et workflows en Low-Code avec SAP Build, portail d'entreprise centralisé.
+        </p>
+        <p>
+          Lorsque c'est pertinent, nous intégrons des services IA de la BTP comme <strong>Joule</strong> ou le <strong>Document Information Extractor</strong>. Objectif constant&nbsp;: une technologie au service du métier, jamais l'inverse.
+        </p>
+        <div class="tech-list">
+          <span class="chip">Business Application Studio</span>
+          <span class="chip">SAP Build</span>
+          <span class="chip">Portail entreprise</span>
+          <span class="chip">Joule</span>
+          <span class="chip">Document Information Extractor</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== IA ====== -->
+<section class="ia" id="ia" data-screen-label="04 IA">
+  <div class="wrap">
+    <div class="sec-label">
+      <span class="dot"></span>
+      <span class="num">§ 03</span>
+      <span class="name">Intelligence artificielle</span>
+      <span class="line"></span>
+      <span class="mono">— Nouvelle attaque</span>
+    </div>
+
+    <div class="ia-layout">
+      <div>
+        <h2>L'IA est une partie <em>intégrante de SAP</em> et vous permet d'avancer encore plus loin dans la partie.</h2>
+      </div>
+      <div class="body">
+        <p>
+          Avant de déployer l'IA, il faut identifier les bons cas d'usage. Analyser l'existant, détecter les frictions, puis proposer des cas métiers crédibles et activables.
+        </p>
+        <div class="ia-steps">
+          <div class="ia-step"><span class="title">Observer les systèmes existants</span><span class="arr">→</span></div>
+          <div class="ia-step"><span class="title">Détecter les pertes de valeur</span><span class="arr">→</span></div>
+          <div class="ia-step"><span class="title">Identifier des cas métiers concrets</span><span class="arr">→</span></div>
+          <div class="ia-step"><span class="title">Tester, ajuster, intégrer, développer</span><span class="arr">→</span></div>
+          <div class="ia-step"><span class="title">Analyser et vous accompagner</span><span class="arr">→</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== RÉFÉRENCES ====== -->
+<section class="refs" id="refs" data-screen-label="05 Références">
+  <div class="wrap">
+    <div class="sec-label">
+      <span class="dot"></span>
+      <span class="num">§ 04</span>
+      <span class="name">Références &amp; chiffres</span>
+      <span class="line"></span>
+      <span class="mono">— Feuille de match</span>
+    </div>
+
+    <h2>Quelques matchs déjà <em>bien menés</em> dans l'industrie.</h2>
+
+    <div class="testi-grid">
+      <div class="testi">
+        <div class="testi-logo">
+          <span class="testi-logo-slot">LOGO<br>SVG</span>
+          <span class="testi-logo-name">VISEO<small>— Client référence</small></span>
+        </div>
+        <blockquote>
+          Une collaboration fiable, fluide et transparente, avec une vraie compréhension de nos enjeux métier.
+        </blockquote>
+        <cite>Prénom Nom · Poste</cite>
+      </div>
+      <div class="testi">
+        <div class="testi-logo">
+          <span class="testi-logo-slot">LOGO<br>SVG</span>
+          <span class="testi-logo-name">SODIAAL<small>— Client référence</small></span>
+        </div>
+        <blockquote>
+          ORIA Solutions apporte une expertise solide, avec une approche pragmatique et adaptée à la réalité du terrain.
+        </blockquote>
+        <cite>Prénom Nom · Poste</cite>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="num">25<em>+</em></div>
+        <div class="label">Années d'expérience cumulée</div>
+      </div>
+      <div class="stat">
+        <div class="num">35</div>
+        <div class="label">Projets réalisés</div>
+      </div>
+      <div class="stat">
+        <div class="num">9</div>
+        <div class="label">Implémentations S/4HANA Greenfield</div>
+      </div>
+      <div class="stat">
+        <div class="num">3</div>
+        <div class="label">Conversions S/4HANA Brownfield</div>
+      </div>
+      <div class="stat wide">
+        <div class="label">Interventions</div>
+        <div class="num">France · Singapour · USA · Mexique · Belgique · Suisse</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== ÉQUIPE ====== -->
+<section class="team" id="team" data-screen-label="06 Équipe">
+  <div class="wrap">
+    <div class="sec-label">
+      <span class="dot"></span>
+      <span class="num">§ 05</span>
+      <span class="name">Équipe</span>
+      <span class="line"></span>
+      <span class="mono">— Notre duo</span>
+    </div>
+
+    <h2>Notre duo <em>sur le terrain.</em></h2>
+
+    <div class="duo">
+      <div class="player">
+        <div class="portrait">
+          <span class="portrait-slot">Photo<br>portrait<br>4:5</span>
+          <span class="jersey">07</span>
+          <span class="portrait-dims">— IMG 01<br>À fournir</span>
+          <span class="portrait-caption">Portrait · Delphine Pfleger</span>
+        </div>
+        <div class="player-role">#07 · L'attaquante</div>
+        <div class="player-name">Delphine Pfleger</div>
+        <div class="player-tag">— lecture métier, cadrage fonctionnel</div>
+        <div class="player-sub">Lecture métier, cadrage fonctionnel, vision terrain</div>
+        <p class="player-text">
+          Delphine accompagne les équipes industrielles dans la lecture du besoin métier et la traduction des enjeux terrain dans SAP. Spécialiste des modules <strong>QM</strong> et <strong>eWM</strong>, elle intervient du cadrage fonctionnel aux ateliers de conception, avec une attention constante à la cohérence des processus et à l'adoption. Elle accompagne aussi les transformations <strong>S/4HANA</strong>, en aidant à arbitrer, prioriser et sécuriser la trajectoire projet.
+          <br><br>
+          Mais ne vous trompez pas — <strong>joueuse de hockey sur glace semi-professionnelle depuis 15 ans,</strong> pour Delphine chaque projet est un match qu'elle aime remporter haut la main.
+        </p>
+      </div>
+      <div class="player">
+        <div class="portrait">
+          <span class="portrait-slot">Photo<br>portrait<br>4:5</span>
+          <span class="jersey">22</span>
+          <span class="portrait-dims">— IMG 02<br>À fournir</span>
+          <span class="portrait-caption">Portrait · Fabrice Garnier</span>
+        </div>
+        <div class="player-role">#22 · Le défenseur</div>
+        <div class="player-name">Fabrice Garnier</div>
+        <div class="player-tag">— précision technique, exécution</div>
+        <div class="player-sub">Précision technique, développements sur mesure, exécution</div>
+        <p class="player-text">
+          Fabrice conçoit et développe des solutions SAP sur mesure, avec une approche très technique et une vraie culture du <strong>Cloud</strong>. Son mantra est simple&nbsp;: <strong>S/4HANA est le cœur</strong> du système, et on ne doit jamais l'oublier. Ici, chaque choix doit servir le métier, pas l'inverse.
+          <br><br>
+          Pour garder sa maîtrise, Fabrice aime avoir un pied dehors&nbsp;: les <strong>voyages</strong> sont son terrain de jeu pour prendre du recul, s'inspirer et revenir avec de nouvelles idées.
+        </p>
+      </div>
+    </div>
+
+    <div class="team-conclusion">
+      <p>Ensemble, être <em>engagés,</em> jouer franc, et construire des solutions qui ont du sens.</p>
+      <span class="mono">— Fin de la présentation équipe</span>
+    </div>
+  </div>
+</section>
+
+<!-- ====== CONTACT ====== -->
+<section class="contact" id="contact" data-screen-label="07 Contact">
+  <div class="wrap">
+    <div class="sec-label">
+      <span class="dot"></span>
+      <span class="num">§ 06</span>
+      <span class="name">Contact</span>
+      <span class="line"></span>
+      <span class="mono">— Mise au jeu</span>
+    </div>
+
+    <div class="contact-layout">
+      <div>
+        <h2>Prenons la <em>mise au jeu.</em></h2>
+        <p class="lead">
+          Vous avez une problématique métier, un besoin d'évolution SAP, un sujet S/4HANA ou une réflexion logicielle autour de l'IA&nbsp;? Parlons-en.
+        </p>
+        <div class="contact-details">
+          <div class="row"><span class="k">Email</span><span class="v"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="15767a7b61747661557a677c7438667a7960617c7a7b663b7367">[email&#160;protected]</a></span></div>
+          <div class="row"><span class="k">Téléphone</span><span class="v">+33 (0)X XX XX XX XX</span></div>
+          <div class="row"><span class="k">Siège</span><span class="v">Strasbourg, France</span></div>
+          <div class="row"><span class="k">LinkedIn</span><span class="v">/company/oria-solutions</span></div>
+        </div>
+      </div>
+
+      <form class="oria-form" onsubmit="event.preventDefault(); this.querySelector('.submit-note').textContent = 'Message envoyé — merci.';">
+        <div class="form-row">
+          <div>
+            <label>Prénom</label>
+            <input type="text" name="fn" required />
+          </div>
+          <div>
+            <label>Nom</label>
+            <input type="text" name="ln" required />
+          </div>
+        </div>
+        <div>
+          <label>Email professionnel</label>
+          <input type="email" name="email" required />
+        </div>
+        <div>
+          <label>Société</label>
+          <input type="text" name="co" />
+        </div>
+        <div>
+          <label>Sujet</label>
+          <select name="topic">
+            <option>Projet S/4HANA</option>
+            <option>Module QM / eWM</option>
+            <option>Développement sur-mesure</option>
+            <option>SAP BTP &amp; IA</option>
+            <option>Autre</option>
+          </select>
+        </div>
+        <div>
+          <label>Votre message</label>
+          <textarea name="msg" rows="3" required></textarea>
+        </div>
+        <div class="submit-row">
+          <span class="submit-note">Réponse sous 48 h ouvrées</span>
+          <button type="submit" class="btn-ice">Envoyer <span class="arrow">→</span></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FAQ ====== -->
+<section class="faq" data-screen-label="08 FAQ">
+  <div class="wrap">
+    <div class="sec-label">
+      <span class="dot"></span>
+      <span class="num">§ 07</span>
+      <span class="name">FAQ</span>
+      <span class="line"></span>
+      <span class="mono">— Questions courantes</span>
+    </div>
+    <div class="faq-layout">
+      <div>
+        <h2><em>Petites</em> questions, vraies réponses.</h2>
+        <p class="side-note">
+          → Vous ne trouvez pas votre réponse&nbsp;?<br>
+          Écrivez-nous directement.
+        </p>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item"><div class="faq-q"><span class="question">Travaillez-vous uniquement sur des projets complets&nbsp;?</span><span class="plus">+</span></div><div class="faq-a"><p>[À compléter] Réponse courte indiquant les modalités d'intervention : missions longues, audits, expertises ponctuelles, renforts d'équipe projet.</p></div></div>
+        <div class="faq-item"><div class="faq-q"><span class="question">Intervenez-vous sur S/4HANA&nbsp;?</span><span class="plus">+</span></div><div class="faq-a"><p>[À compléter] Préciser le périmètre S/4HANA couvert : Greenfield, Brownfield, optimisation d'existant.</p></div></div>
+        <div class="faq-item"><div class="faq-q"><span class="question">Faites-vous uniquement du développement&nbsp;?</span><span class="plus">+</span></div><div class="faq-a"><p>[À compléter] Rappeler que l'équipe couvre à la fois le fonctionnel et le développement sur-mesure.</p></div></div>
+        <div class="faq-item"><div class="faq-q"><span class="question">L'IA fait-elle déjà partie de vos offres&nbsp;?</span><span class="plus">+</span></div><div class="faq-a"><p>[À compléter] Expliquer l'approche IA : cadrage des cas d'usage, intégration Joule / DOX / ML embarqué.</p></div></div>
+        <div class="faq-item"><div class="faq-q"><span class="question">Travaillez-vous uniquement pour des clients industriels&nbsp;?</span><span class="plus">+</span></div><div class="faq-a"><p>[À compléter] Préciser les secteurs adressés et l'ouverture à d'autres filières.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FOOTER ====== -->
+<footer>
+  <div class="footer-inner">
+    <div class="col">
+      <h5>ORIA Solutions</h5>
+      <p>Expertise SAP &amp; S/4HANA pour l'industrie. Fonctionnel, technique et cloud — avec sens du jeu collectif.</p>
+    </div>
+    <div class="col">
+      <h5>Navigation</h5>
+      <a href="#approche">Approche</a>
+      <a href="#expertises">Expertises</a>
+      <a href="#ia">IA</a>
+      <a href="#refs">Références</a>
+      <a href="#team">Équipe</a>
+    </div>
+    <div class="col">
+      <h5>Contact</h5>
+      <a href="/cdn-cgi/l/email-protection#afccc0c1dbceccdbefc0ddc6ce82dcc0c3dadbc6c0c1dc81c9dd"><span class="__cf_email__" data-cfemail="72111d1c06131106321d001b135f011d1e07061b1d1c015c1400">[email&#160;protected]</span></a>
+      <a href="#">LinkedIn →</a>
+      <a href="#">Prendre rendez-vous →</a>
+    </div>
+    <div class="col">
+      <h5>Coordonnées</h5>
+      <p>Strasbourg, France<br>Interventions internationales</p>
+    </div>
+  </div>
+  <div class="footer-mega">Oria — saison 2026</div>
+  <div class="footer-bottom">
+    <span>© 2026 ORIA Solutions · Tous droits réservés</span>
+    <span>Mentions légales · Confidentialité</span>
+  </div>
+</footer>
+
+<!-- ====== TWEAKS ====== -->
+<div id="tweaks">
+  <h5>Tweaks</h5>
+
+  <div class="tw-row">
+    <label>Accent</label>
+    <div class="swatches" id="acc-sw">
+      <div class="sw active" data-accent="glacier" style="background: #A8C5D6;"></div>
+      <div class="sw" data-accent="ink" style="background: #14171A;"></div>
+      <div class="sw" data-accent="warm" style="background: #C8553D;"></div>
+      <div class="sw" data-accent="mint" style="background: #9FCFB0;"></div>
+    </div>
+  </div>
+
+  <div class="tw-row">
+    <label>Densité</label>
+    <div class="seg" id="density-seg">
+      <button data-density="airy" class="active">Aéré</button>
+      <button data-density="compact">Compact</button>
+    </div>
+  </div>
+
+  <div class="tw-row">
+    <label>Hockey</label>
+    <div class="seg" id="hockey-seg">
+      <button data-hockey="low">Discret</button>
+      <button data-hockey="high" class="active">Fil rouge</button>
+    </div>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+    "accent": "glacier",
+    "density": "compact",
+    "hockey": "high"
+  }/*EDITMODE-END*/;
+
+  let state = { ...TWEAK_DEFAULTS };
+
+  // Nav scroll border
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(it => {
+    it.addEventListener('click', () => it.classList.toggle('open'));
+  });
+
+  // Apply tweaks
+  function applyTweaks() {
+    const accents = {
+      glacier: { glacier: '#5BC5E8', glacierDeep: '#0B0F4A' },
+      ink:     { glacier: '#8C95A0', glacierDeep: '#14171A' },
+      warm:    { glacier: '#E3B5A8', glacierDeep: '#C8553D' },
+      mint:    { glacier: '#CBE3D1', glacierDeep: '#5A9576' },
+    };
+    const a = accents[state.accent] || accents.glacier;
+    document.documentElement.style.setProperty('--glacier', a.glacier);
+    document.documentElement.style.setProperty('--glacier-deep', a.glacierDeep);
+
+    document.body.classList.toggle('compact', state.density === 'compact');
+    document.body.classList.toggle('low-hockey', state.hockey === 'low');
+
+    // Update UI
+    document.querySelectorAll('#acc-sw .sw').forEach(s => s.classList.toggle('active', s.dataset.accent === state.accent));
+    document.querySelectorAll('#density-seg button').forEach(b => b.classList.toggle('active', b.dataset.density === state.density));
+    document.querySelectorAll('#hockey-seg button').forEach(b => b.classList.toggle('active', b.dataset.hockey === state.hockey));
+  }
+
+  // Edit-mode protocol
+  window.addEventListener('message', (e) => {
+    const d = e.data || {};
+    if (d.type === '__activate_edit_mode') document.getElementById('tweaks').classList.add('open');
+    if (d.type === '__deactivate_edit_mode') document.getElementById('tweaks').classList.remove('open');
+  });
+  window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+
+  function persist(patch) {
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits: patch }, '*');
+  }
+
+  document.querySelectorAll('#acc-sw .sw').forEach(s => {
+    s.addEventListener('click', () => { state.accent = s.dataset.accent; applyTweaks(); persist({ accent: state.accent }); });
+  });
+  document.querySelectorAll('#density-seg button').forEach(b => {
+    b.addEventListener('click', () => { state.density = b.dataset.density; applyTweaks(); persist({ density: state.density }); });
+  });
+  document.querySelectorAll('#hockey-seg button').forEach(b => {
+    b.addEventListener('click', () => { state.hockey = b.dataset.hockey; applyTweaks(); persist({ hockey: state.hockey }); });
+  });
+
+  applyTweaks();
+</script>
+
+</body>
+</html>
