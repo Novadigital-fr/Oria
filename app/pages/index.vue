@@ -12,6 +12,22 @@ if (import.meta.client) {
   onMounted(() => {
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
+
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (!reduce && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible')
+            io.unobserve(entry.target)
+          }
+        }
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' })
+
+      document.querySelectorAll('.reveal, .reveal-stagger').forEach((el) => io.observe(el))
+    } else {
+      document.querySelectorAll('.reveal, .reveal-stagger').forEach((el) => el.classList.add('is-visible'))
+    }
   })
   onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
 }
@@ -74,26 +90,28 @@ const stats = [
 <template>
   <div class="atelier-root">
     <nav :class="['nav', { 'is-scrolled': scrolled }]">
-      <a href="#" class="brand" aria-label="ORIA Solutions">
-        <img
-          src="/assets/img/oria-logo.svg"
-          alt="ORIA Solutions"
-          class="brand-logo"
-        />
-      </a>
-      <div class="nav-links">
-        <a href="#approche">Approche</a>
-        <a href="#expertises">Expertises</a>
-        <a href="#ia">IA</a>
-        <a href="#equipe">Équipe</a>
+      <div class="nav-inner">
+        <a href="#" class="brand" aria-label="ORIA Solutions">
+          <img
+            src="/assets/img/oria-logo.svg"
+            alt="ORIA Solutions"
+            class="brand-logo"
+          />
+        </a>
+        <div class="nav-links">
+          <a href="#approche">Approche</a>
+          <a href="#expertises">Expertises</a>
+          <a href="#ia">IA</a>
+          <a href="#equipe">Équipe</a>
+        </div>
+        <a href="#contact" class="nav-cta">Nous contacter</a>
       </div>
-      <a href="#contact" class="nav-cta">Nous contacter</a>
     </nav>
 
     <!-- ============ HERO ============ -->
     <section class="hero">
       <div class="wrap hero-grid">
-        <div class="hero-text">
+        <div class="hero-text reveal">
           <span class="hero-pill">ORIA Solutions — Saison 2026</span>
           <h1 class="hero-title">
             Nous faisons avancer vos projets SAP avec précision, engagement et <em>sens du jeu collectif.</em>
@@ -121,7 +139,7 @@ const stats = [
           </div>
         </div>
 
-        <div class="hero-photo">
+        <div class="hero-photo reveal">
           <div class="hero-photo-frame">
             <NuxtImg
               src="/assets/img/equipe.webp"
@@ -131,26 +149,6 @@ const stats = [
               loading="eager"
             />
           </div>
-          <a href="#references" class="case-card" aria-label="Voir les références">
-            <div class="case-thumb">
-              <NuxtImg
-                src="/assets/img/webdev.webp"
-                alt=""
-                width="120"
-                height="120"
-                loading="eager"
-              />
-            </div>
-            <div class="case-body">
-              <p class="case-title">
-                S/4HANA Greenfield&nbsp;: 9 implémentations menées en industrie agroalimentaire et tech.
-              </p>
-              <div class="case-foot">
-                <span class="case-tag">Étude de cas</span>
-                <span class="case-arr" aria-hidden="true">→</span>
-              </div>
-            </div>
-          </a>
         </div>
       </div>
     </section>
@@ -158,7 +156,7 @@ const stats = [
     <!-- ============ APPROCHE ============ -->
     <section id="approche" class="section approche">
       <div class="wrap">
-        <header class="sec-head">
+        <header class="sec-head reveal">
           <span class="sec-num serif-italic">01</span>
           <div>
             <h2 class="sec-eyebrow">Approche</h2>
@@ -166,11 +164,11 @@ const stats = [
           </div>
         </header>
 
-        <p class="sec-intro">
+        <p class="sec-intro reveal">
           De l'analyse métier au développement technique, ORIA Solutions intervient là où il faut, avec le bon niveau d'expertise et le bon tempo.
         </p>
 
-        <div class="play-grid">
+        <div class="play-grid reveal-stagger">
           <article class="play">
             <div class="play-tag">Play 01 — Fonctionnel</div>
             <h4>Lecture métier &amp; expertise fonctionnelle</h4>
@@ -207,7 +205,7 @@ const stats = [
     <!-- ============ EXPERTISES ============ -->
     <section id="expertises" class="section expertises">
       <div class="wrap">
-        <header class="sec-head">
+        <header class="sec-head reveal">
           <span class="sec-num serif-italic">02</span>
           <div>
             <h2 class="sec-eyebrow">Expertises</h2>
@@ -215,11 +213,11 @@ const stats = [
           </div>
         </header>
 
-        <p class="sec-intro">
+        <p class="sec-intro reveal">
           Un bon projet SAP, ce n'est pas une suite de slides. C'est un enchaînement fluide entre compréhension, décision, exécution et amélioration continue.
         </p>
 
-        <ol class="phases">
+        <ol class="phases reveal-stagger">
           <li v-for="p in phases" :key="p.n">
             <span class="phase-num serif-italic">{{ p.n }}</span>
             <h4>{{ p.title }}</h4>
@@ -227,7 +225,7 @@ const stats = [
           </li>
         </ol>
 
-        <article class="deep">
+        <article class="deep reveal">
           <header>
             <span class="deep-eyebrow">— Au cœur de l'ERP</span>
             <h4>L'excellence <em>S/4HANA.</em></h4>
@@ -248,7 +246,7 @@ const stats = [
           </div>
         </article>
 
-        <div class="band">
+        <div class="band reveal">
           <NuxtImg
             src="/assets/img/webdev.webp"
             alt=""
@@ -258,7 +256,7 @@ const stats = [
           />
         </div>
 
-        <article class="deep">
+        <article class="deep reveal">
           <header>
             <span class="deep-eyebrow">— Autour de l'ERP</span>
             <h4>L'agilité avec <em>SAP BTP</em> (Cloud).</h4>
@@ -285,7 +283,7 @@ const stats = [
     <!-- ============ IA ============ -->
     <section id="ia" class="section ia">
       <div class="wrap">
-        <header class="sec-head">
+        <header class="sec-head reveal">
           <span class="sec-num serif-italic">03</span>
           <div>
             <h2 class="sec-eyebrow">Intelligence artificielle</h2>
@@ -294,7 +292,7 @@ const stats = [
         </header>
 
         <div class="ia-grid">
-        <div class="ia-text">
+        <div class="ia-text reveal">
           <p class="ia-lede">
             Avant de déployer l'IA, il faut identifier les bons cas d'usage. Analyser l'existant, détecter les frictions, puis proposer des cas métiers crédibles et activables.
           </p>
@@ -324,7 +322,7 @@ const stats = [
           </div>
         </div>
 
-        <div class="ia-photo">
+        <div class="ia-photo reveal">
           <div class="ia-photo-frame">
             <NuxtImg
               src="/assets/img/webdev.webp"
@@ -379,7 +377,7 @@ const stats = [
     <!-- ============ REFERENCES ============ -->
     <section id="references" class="section refs">
       <div class="wrap">
-        <header class="refs-head">
+        <header class="refs-head reveal">
           <span class="sec-num serif-italic">04</span>
           <h2 class="sec-eyebrow">Références</h2>
           <h3 class="refs-title">
@@ -388,7 +386,7 @@ const stats = [
           <a href="#contact" class="btn btn-ghost refs-cta">Nous contacter</a>
         </header>
 
-        <div class="testi-row">
+        <div class="testi-row reveal-stagger">
           <article class="testi-photo">
             <NuxtImg
               src="/assets/img/equipe.webp"
@@ -442,7 +440,7 @@ const stats = [
           </article>
         </div>
 
-        <div class="stats">
+        <div class="stats reveal">
           <div v-for="s in stats" :key="s.label" class="stat">
             <div class="stat-num">
               {{ s.n }}<em v-if="s.suffix">{{ s.suffix }}</em>
@@ -460,7 +458,7 @@ const stats = [
     <!-- ============ ÉQUIPE ============ -->
     <section id="equipe" class="section team">
       <div class="wrap">
-        <header class="sec-head">
+        <header class="sec-head reveal">
           <span class="sec-num serif-italic">05</span>
           <div>
             <h2 class="sec-eyebrow">Équipe</h2>
@@ -468,7 +466,7 @@ const stats = [
           </div>
         </header>
 
-        <div class="duo">
+        <div class="duo reveal-stagger">
           <article class="player">
             <div class="player-photo">
               <NuxtImg
@@ -524,16 +522,9 @@ const stats = [
     <!-- ============ CONTACT ============ -->
     <section id="contact" class="section contact">
       <div class="wrap">
-        <header class="sec-head sec-head-light">
-          <span class="sec-num serif-italic">06</span>
-          <div>
-            <h2 class="sec-eyebrow">Contact</h2>
-            <h3 class="sec-title">Prenons la <em>mise au jeu.</em></h3>
-          </div>
-        </header>
-
-        <div class="contact-grid">
+        <div class="contact-card reveal">
           <div class="contact-side">
+            <h3 class="contact-title">Prenons la <em>mise au jeu.</em></h3>
             <p class="contact-lead">
               Vous avez une problématique métier, un besoin d'évolution SAP, un sujet S/4HANA ou une réflexion logicielle autour de l'IA ? Parlons-en.
             </p>
@@ -561,20 +552,20 @@ const stats = [
             <div class="row-2">
               <label>
                 Prénom
-                <input type="text" name="fn" required />
+                <input type="text" name="fn" placeholder="Prénom" required />
               </label>
               <label>
                 Nom
-                <input type="text" name="ln" required />
+                <input type="text" name="ln" placeholder="Nom" required />
               </label>
             </div>
             <label>
               Email professionnel
-              <input type="email" name="email" required />
+              <input type="email" name="email" placeholder="email@entreprise.com" required />
             </label>
             <label>
               Société
-              <input type="text" name="co" />
+              <input type="text" name="co" placeholder="Nom de l'entreprise" />
             </label>
             <label>
               Sujet
@@ -588,11 +579,14 @@ const stats = [
             </label>
             <label>
               Votre message
-              <textarea name="msg" rows="3" required></textarea>
+              <textarea name="msg" rows="4" placeholder="Parlez-nous de votre projet" required></textarea>
             </label>
             <div class="form-foot">
               <span class="form-note">{{ submitNote }}</span>
-              <button type="submit" class="btn btn-rust">Envoyer</button>
+              <button type="submit" class="btn btn-rust">
+                Envoyer
+                <span class="btn-arrow" aria-hidden="true">→</span>
+              </button>
             </div>
           </form>
         </div>
@@ -601,7 +595,7 @@ const stats = [
 
     <!-- ============ FAQ ============ -->
     <section class="section faq">
-      <div class="wrap faq-grid">
+      <div class="wrap faq-grid reveal">
         <header class="faq-head">
           <span class="sec-num serif-italic">07</span>
           <h2 class="sec-eyebrow">FAQ</h2>
@@ -695,8 +689,8 @@ const stats = [
   --ice: #eaf1fb;
   --ice-line: #cfdcef;
 
-  --max: 1280px;
-  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --max: 1920px;
+  --gutter: clamp(1.25rem, 3vw, 3rem);
   --section-y: clamp(5rem, 11vw, 10rem);
 
   --font-sans: "Inter Tight", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -717,7 +711,8 @@ const stats = [
 .atelier-root *::before,
 .atelier-root *::after { box-sizing: border-box; }
 
-.atelier-root a { color: inherit; text-decoration: none; }
+.atelier-root a { text-decoration: none; }
+.atelier-root a:not(.btn):not(.nav-cta) { color: inherit; }
 .atelier-root img, .atelier-root :deep(img) { display: block; max-width: 100%; }
 .atelier-root h1, .atelier-root h2, .atelier-root h3, .atelier-root h4, .atelier-root h5, .atelier-root p, .atelier-root ul, .atelier-root ol, .atelier-root dl, .atelier-root dd, .atelier-root figure, .atelier-root blockquote { margin: 0; padding: 0; }
 .atelier-root ul, .atelier-root ol { list-style: none; }
@@ -734,16 +729,20 @@ const stats = [
 /* ============ NAV ============ */
 .nav {
   position: sticky; top: 0; z-index: 50;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  padding: 20px var(--gutter);
-  gap: 1.5rem;
   background: color-mix(in srgb, var(--bone) 86%, transparent);
   backdrop-filter: saturate(140%) blur(14px);
   -webkit-backdrop-filter: saturate(140%) blur(14px);
   border-bottom: 1px solid transparent;
   transition: border-color .2s ease;
+}
+.nav-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  padding: 20px var(--gutter);
+  gap: 1.5rem;
 }
 .nav.is-scrolled { border-bottom-color: var(--line); }
 
@@ -865,8 +864,9 @@ const stats = [
 
 /* ============ HERO ============ */
 .hero {
-  padding-top: clamp(2.5rem, 6vw, 5rem);
-  padding-bottom: clamp(3rem, 7vw, 6rem);
+  min-height: calc(100svh - 80px);
+  padding-top: clamp(2rem, 4vw, 3rem);
+  padding-bottom: clamp(2rem, 4vw, 3rem);
 }
 
 .hero-grid {
@@ -936,14 +936,10 @@ const stats = [
 .hero-trust strong { color: var(--ink); font-weight: 600; }
 .hero-trust .muted { color: var(--ink-mute); }
 
-/* ---- Photo with notched corner + case-study card ---- */
-.hero-photo {
-  position: relative;
-  --notch-pad: 14px;
-}
+.hero-photo { position: relative; }
 .hero-photo-frame {
   position: relative;
-  aspect-ratio: 5 / 6;
+  max-height: calc(100svh - 160px);
   border-radius: 18px;
   overflow: hidden;
   background: var(--cream);
@@ -952,81 +948,6 @@ const stats = [
   width: 100%; height: 100%;
   object-fit: cover;
 }
-
-.case-card {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: min(64%, 360px);
-  display: grid;
-  grid-template-columns: 64px 1fr;
-  gap: 14px;
-  padding: var(--notch-pad) 0 0 var(--notch-pad);
-  background: var(--bone);
-  border-top-left-radius: 22px;
-  align-items: center;
-  text-decoration: none;
-  color: var(--ink);
-}
-.case-card::before,
-.case-card::after {
-  content: '';
-  position: absolute;
-  width: 22px; height: 22px;
-  background: var(--bone);
-  pointer-events: none;
-}
-.case-card::before {
-  top: -22px; left: 0;
-  border-bottom-left-radius: 22px;
-  box-shadow: -8px 8px 0 var(--bone);
-  -webkit-mask: radial-gradient(circle at 0 100%, transparent 22px, #000 22.5px);
-          mask: radial-gradient(circle at 0 100%, transparent 22px, #000 22.5px);
-}
-.case-card::after {
-  left: -22px; bottom: 0;
-  border-top-right-radius: 22px;
-  -webkit-mask: radial-gradient(circle at 100% 0, transparent 22px, #000 22.5px);
-          mask: radial-gradient(circle at 100% 0, transparent 22px, #000 22.5px);
-}
-
-.case-thumb {
-  aspect-ratio: 1;
-  border-radius: 10px;
-  overflow: hidden;
-  background: var(--cream);
-}
-.case-thumb :deep(img) { width: 100%; height: 100%; object-fit: cover; }
-
-.case-body { display: grid; gap: 8px; padding-right: 4px; }
-.case-title {
-  font-size: 13px;
-  line-height: 1.35;
-  color: var(--ink);
-  font-weight: 500;
-}
-.case-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-.case-tag {
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ink-mute);
-  background: rgba(28,24,20,0.04);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 4px 10px;
-  font-weight: 500;
-}
-.case-arr {
-  width: 26px; height: 26px;
-  border-radius: 999px;
-  border: 1px solid var(--line);
-  display: inline-flex; align-items: center; justify-content: center;
-  font-size: 12px;
-  color: var(--ink-mute);
-  transition: all .2s ease;
-}
-.case-card:hover .case-arr { background: var(--ink); border-color: var(--ink); color: var(--bone); }
 
 /* ============ APPROCHE ============ */
 .approche { background: var(--bone); }
@@ -1084,6 +1005,7 @@ const stats = [
   background: var(--ice);
   color: var(--ink);
 }
+.expertises .wrap { max-width: 1280px; }
 .expertises .sec-head {
   border-bottom-color: var(--ice-line);
 }
@@ -1180,6 +1102,7 @@ const stats = [
 
 /* ============ IA ============ */
 .ia { background: var(--bone); }
+.ia .wrap { max-width: 1280px; }
 
 .ia-grid {
   display: grid;
@@ -1233,7 +1156,8 @@ const stats = [
 /* photo + floating phase card */
 .ia-photo {
   position: relative;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 4 / 3;
+  max-height: calc(100svh - 200px);
   --notch-r: 22px;
 }
 
@@ -1344,15 +1268,14 @@ const stats = [
   border-radius: 14px;
   overflow: hidden;
   background: var(--cream);
-  aspect-ratio: 4 / 5;
-  min-height: 380px;
+  aspect-ratio: 4 / 3;
 }
 .testi-photo :deep(img) {
   width: 100%; height: 100%;
   object-fit: cover;
   display: block;
 }
-@media (max-width: 1079px) { .testi-photo { aspect-ratio: 16 / 10; min-height: 0; } }
+@media (max-width: 1079px) { .testi-photo { aspect-ratio: 16 / 10; } }
 
 .testi-card {
   position: relative;
@@ -1362,7 +1285,6 @@ const stats = [
   display: grid;
   grid-template-rows: 1fr auto;
   gap: 28px;
-  min-height: 380px;
 }
 
 .testi-quote {
@@ -1483,13 +1405,10 @@ const stats = [
 /* ============ EQUIPE ============ */
 .team {
   position: relative;
-  background:
-    radial-gradient(ellipse 70% 40% at 18% 8%, rgba(0,212,210,0.28), transparent 65%),
-    radial-gradient(ellipse 55% 35% at 88% 12%, rgba(75,0,132,0.18), transparent 65%),
-    radial-gradient(ellipse 80% 45% at 50% 96%, rgba(0,97,234,0.22), transparent 65%),
-    var(--bone);
+  background: var(--bone);
   overflow: hidden;
 }
+.team .wrap { max-width: 1280px; }
 
 .team-callout {
   position: relative;
@@ -1638,21 +1557,43 @@ const stats = [
 
 /* ============ CONTACT ============ */
 .contact {
-  background: var(--ice);
+  position: relative;
   color: var(--ink);
+  background:
+    radial-gradient(ellipse 60% 40% at 12% 10%, rgba(0,212,210,0.32), transparent 65%),
+    radial-gradient(ellipse 55% 35% at 88% 18%, rgba(75,0,132,0.22), transparent 65%),
+    radial-gradient(ellipse 70% 50% at 50% 95%, rgba(0,97,234,0.28), transparent 65%),
+    radial-gradient(ellipse 50% 35% at 95% 80%, rgba(0,179,216,0.22), transparent 65%),
+    var(--bone);
+  overflow: hidden;
 }
-.sec-head-light {
-  border-bottom-color: var(--ice-line);
-}
-.sec-head-light .sec-num { color: var(--brand-blue); }
-.sec-head-light .sec-eyebrow { color: var(--ink-mute); }
-.sec-head-light .sec-title em { color: var(--brand-blue); }
 
-.contact-grid {
+.contact-card {
+  background: var(--cream);
+  border-radius: clamp(20px, 2.5vw, 32px);
+  padding: clamp(2rem, 4vw, 4rem);
   display: grid;
   gap: clamp(2.5rem, 5vw, 5rem);
+  box-shadow: 0 30px 80px rgba(15,20,36,0.08), 0 8px 20px rgba(15,20,36,0.04);
 }
-@media (min-width: 880px) { .contact-grid { grid-template-columns: 1fr 1.05fr; } }
+@media (min-width: 880px) {
+  .contact-card { grid-template-columns: 1fr 1.05fr; align-items: start; }
+}
+
+.contact-side {
+  display: grid;
+  gap: 24px;
+  align-content: start;
+}
+.contact-title {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(36px, 4.4vw, 60px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  max-width: 14ch;
+}
+.contact-title em { font-style: italic; color: var(--brand-blue); }
 
 .contact-lead {
   font-size: 17px;
@@ -1661,7 +1602,7 @@ const stats = [
   max-width: 44ch;
 }
 .contact-details {
-  margin-top: 40px;
+  margin-top: 16px;
   display: grid;
   gap: 0;
 }
@@ -1685,12 +1626,8 @@ const stats = [
 .contact-details a:hover { color: var(--brand-blue); }
 
 .oria-form {
-  background: var(--paper);
-  color: var(--ink);
-  padding: clamp(28px, 3.5vw, 44px);
-  border-radius: 6px;
   display: grid;
-  gap: 22px;
+  gap: 18px;
 }
 .oria-form label {
   display: grid;
@@ -1705,30 +1642,35 @@ const stats = [
 .oria-form textarea,
 .oria-form select {
   width: 100%;
-  background: transparent;
-  border: 0;
-  border-bottom: 1px solid var(--line);
+  background: rgba(15,20,36,0.04);
+  border: 1px solid transparent;
+  border-radius: 12px;
   color: var(--ink);
   font-size: 15px;
-  padding: 6px 0 12px;
+  padding: 14px 16px;
   outline: none;
   text-transform: none;
   letter-spacing: 0;
-  transition: border-color .2s ease;
+  transition: background .2s ease, border-color .2s ease;
 }
+.oria-form input::placeholder,
+.oria-form textarea::placeholder { color: var(--ink-mute); }
 .oria-form input:focus,
 .oria-form textarea:focus,
-.oria-form select:focus { border-bottom-color: var(--rust); }
-.oria-form textarea { resize: vertical; min-height: 80px; }
+.oria-form select:focus {
+  background: #fff;
+  border-color: var(--brand-blue);
+}
+.oria-form textarea { resize: vertical; min-height: 110px; }
 .oria-form select { appearance: none; cursor: pointer; }
 
-.row-2 { display: grid; gap: 22px; }
+.row-2 { display: grid; gap: 18px; }
 @media (min-width: 600px) { .row-2 { grid-template-columns: 1fr 1fr; } }
 
 .form-foot {
   display: flex; justify-content: space-between; align-items: center;
   flex-wrap: wrap; gap: 12px;
-  margin-top: 4px;
+  margin-top: 8px;
 }
 .form-note {
   font-size: 11px;
@@ -1736,6 +1678,14 @@ const stats = [
   text-transform: uppercase;
   color: var(--ink-mute);
   font-weight: 500;
+}
+.oria-form .btn-rust {
+  border-radius: 999px;
+  padding: 14px 22px;
+}
+.oria-form .btn-rust .btn-arrow {
+  background: #fff;
+  color: var(--brand-blue);
 }
 
 /* ============ FAQ ============ */
@@ -1820,6 +1770,7 @@ const stats = [
   padding-bottom: 32px;
   border-top: 1px solid var(--ice-line);
 }
+.footer .wrap { max-width: 1280px; }
 
 .footer-top {
   display: grid;
@@ -1886,5 +1837,88 @@ const stats = [
   .sec-num { font-size: 56px; }
   .hero-meta > div { grid-template-columns: 1fr; gap: 4px; }
   .contact-details > div { grid-template-columns: 1fr; gap: 4px; }
+}
+
+/* ============ ANIMATIONS ============ */
+.atelier-root .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity .85s cubic-bezier(.22,.61,.36,1),
+    transform .85s cubic-bezier(.22,.61,.36,1);
+  will-change: opacity, transform;
+}
+.atelier-root .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.atelier-root .reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity .7s cubic-bezier(.22,.61,.36,1),
+    transform .7s cubic-bezier(.22,.61,.36,1);
+}
+.atelier-root .reveal-stagger.is-visible > * { opacity: 1; transform: none; }
+.atelier-root .reveal-stagger.is-visible > *:nth-child(1) { transition-delay: 0s; }
+.atelier-root .reveal-stagger.is-visible > *:nth-child(2) { transition-delay: .08s; }
+.atelier-root .reveal-stagger.is-visible > *:nth-child(3) { transition-delay: .16s; }
+.atelier-root .reveal-stagger.is-visible > *:nth-child(4) { transition-delay: .24s; }
+.atelier-root .reveal-stagger.is-visible > *:nth-child(5) { transition-delay: .32s; }
+
+/* image hover zoom (subtle) */
+.hero-photo-frame :deep(img),
+.testi-photo :deep(img),
+.player-photo :deep(img),
+.ia-photo-frame :deep(img),
+.band :deep(img) {
+  transition: transform 1.1s cubic-bezier(.2,.7,.2,1);
+}
+.hero-photo:hover .hero-photo-frame :deep(img),
+.testi-photo:hover :deep(img),
+.player-photo:hover :deep(img),
+.ia-photo:hover .ia-photo-frame :deep(img),
+.band:hover :deep(img) { transform: scale(1.04); }
+
+/* card lift on hover */
+.play, .testi-card, .deep, .ia-feature {
+  transition: transform .35s cubic-bezier(.22,.61,.36,1);
+}
+.testi-card:hover { transform: translateY(-4px); }
+.ia-feature:hover { transform: translateY(-3px); }
+
+/* phase card gentle float */
+.phase-card { animation: oria-float 7s ease-in-out infinite; }
+@keyframes oria-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* avatars subtle stagger appear in hero */
+.hero-text.is-visible .ava {
+  animation: oria-pop .7s cubic-bezier(.22,.61,.36,1) both;
+}
+.hero-text.is-visible .ava-1 { animation-delay: .35s; }
+.hero-text.is-visible .ava-2 { animation-delay: .42s; }
+.hero-text.is-visible .ava-3 { animation-delay: .49s; }
+.hero-text.is-visible .ava-4 { animation-delay: .56s; }
+@keyframes oria-pop {
+  0% { opacity: 0; transform: scale(.6); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* faq plus rotation already styled, keep */
+
+/* respect motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .atelier-root .reveal,
+  .atelier-root .reveal-stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .phase-card { animation: none; }
+  .hero-text.is-visible .ava { animation: none; }
 }
 </style>
