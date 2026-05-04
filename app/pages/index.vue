@@ -58,7 +58,7 @@ const faqItems = [
   }
 ]
 
-const submitNote = ref('Réponse sous 48 h ouvrées')
+const submitNote = ref('')
 const onSubmit = (e: Event) => {
   e.preventDefault()
   submitNote.value = 'Message envoyé — merci.'
@@ -93,7 +93,7 @@ const stats = [
       <div class="nav-inner">
         <a href="#" class="brand" aria-label="ORIA Solutions">
           <img
-            src="/assets/img/oria-logo.svg"
+            src="/assets/img/logo-horizontal.png"
             alt="ORIA Solutions"
             class="brand-logo"
           />
@@ -114,35 +114,23 @@ const stats = [
         <div class="hero-text reveal">
           <span class="hero-pill">ORIA Solutions — Saison 2026</span>
           <h1 class="hero-title">
-            Nous faisons avancer vos projets SAP avec précision, engagement et <em>sens du jeu collectif.</em>
+            Nous faisons avancer vos <em>projets SAP</em> avec précision, engagement et sens du jeu collectif.
           </h1>
           <p class="hero-lede">
             Expertise fonctionnelle, développement sur mesure, vision terrain : ORIA Solutions accompagne les entreprises industrielles à chaque étape de leurs projets SAP &amp; S/4HANA.
           </p>
           <div class="hero-actions">
             <a class="btn btn-dark" href="#contact">
-              Prendre la mise au jeu
+              Nous contacter
               <span class="btn-arrow" aria-hidden="true">→</span>
             </a>
-            <a class="btn btn-ghost" href="#equipe">Rencontrer l'équipe</a>
-          </div>
-          <div class="hero-bottom">
-            <div class="avatars" aria-hidden="true">
-              <span class="ava ava-1"></span>
-              <span class="ava ava-2"></span>
-              <span class="ava ava-3"></span>
-              <span class="ava ava-4"></span>
-            </div>
-            <p class="hero-trust">
-              <strong>+25 ans</strong> d'expérience cumulée — <span class="muted">35 projets SAP livrés</span>
-            </p>
           </div>
         </div>
 
         <div class="hero-photo reveal">
           <div class="hero-photo-frame">
             <NuxtImg
-              src="/assets/img/equipe.webp"
+              src="/assets/img/Accueil.png"
               alt=""
               width="1400"
               height="1600"
@@ -164,11 +152,11 @@ const stats = [
           </div>
         </header>
 
-        <p class="sec-intro reveal">
+        <p class="sec-intro sec-intro-blue reveal">
           De l'analyse métier au développement technique, ORIA Solutions intervient là où il faut, avec le bon niveau d'expertise et le bon tempo.
         </p>
 
-        <div class="play-grid reveal-stagger">
+        <div class="play-grid play-grid-spaced reveal-stagger">
           <article class="play">
             <div class="play-tag">Play 01 — Fonctionnel</div>
             <h4>Lecture métier &amp; expertise fonctionnelle</h4>
@@ -209,7 +197,7 @@ const stats = [
           <span class="sec-num serif-italic">02</span>
           <div>
             <h2 class="sec-eyebrow">Expertises</h2>
-            <h3 class="sec-title">De la lecture du terrain à la <em>mise en œuvre.</em></h3>
+            <h3 class="sec-title">Du terrain à la <em>mise en œuvre.</em></h3>
           </div>
         </header>
 
@@ -286,8 +274,8 @@ const stats = [
         <header class="sec-head reveal">
           <span class="sec-num serif-italic">03</span>
           <div>
-            <h2 class="sec-eyebrow">Intelligence artificielle</h2>
-            <h3 class="sec-title">L'IA, partie intégrante de SAP — pour aller <em>plus loin dans la partie.</em></h3>
+            <h2 class="sec-eyebrow">IA</h2>
+            <h3 class="sec-title">L'IA pour aller <em>plus loin.</em></h3>
           </div>
         </header>
 
@@ -383,7 +371,6 @@ const stats = [
           <h3 class="refs-title">
             Le vrai bilan de match, ce sont nos <em>clients</em> qui le racontent.
           </h3>
-          <a href="#contact" class="btn btn-ghost refs-cta">Nous contacter</a>
         </header>
 
         <div class="testi-row reveal-stagger">
@@ -470,17 +457,16 @@ const stats = [
           <article class="player">
             <div class="player-photo">
               <NuxtImg
-                src="/assets/img/equipe.webp"
+                src="/assets/img/Duo Delphine.jpg"
                 alt="Portrait Delphine Pfleger"
                 width="900"
                 height="1125"
                 loading="lazy"
               />
-              <span class="jersey serif-italic">07</span>
             </div>
             <div class="player-meta">
               <div class="player-role">L'attaquante</div>
-              <h4 class="player-name">Delphine Pfleger</h4>
+              <h4 class="player-name">Delphine <span class="player-name-last">PFLEGER</span></h4>
               <p class="player-tag serif-italic">— lecture métier, cadrage fonctionnel</p>
               <p class="player-text">
                 Delphine accompagne les équipes industrielles dans la lecture du besoin métier et la traduction des enjeux terrain dans SAP. Spécialiste des modules <strong>QM</strong> et <strong>eWM</strong>, elle intervient du cadrage fonctionnel aux ateliers de conception, avec une attention constante à la cohérence des processus et à l'adoption. Elle accompagne aussi les transformations <strong>S/4HANA</strong>, en aidant à arbitrer, prioriser et sécuriser la trajectoire projet.
@@ -494,23 +480,22 @@ const stats = [
           <article class="player">
             <div class="player-photo">
               <NuxtImg
-                src="/assets/img/equipe.webp"
+                src="/assets/img/Duo Fabrice.png"
                 alt="Portrait Fabrice Garnier"
                 width="900"
                 height="1125"
                 loading="lazy"
               />
-              <span class="jersey serif-italic">22</span>
             </div>
             <div class="player-meta">
               <div class="player-role">Le défenseur</div>
-              <h4 class="player-name">Fabrice Garnier</h4>
+              <h4 class="player-name">Fabrice <span class="player-name-last">GARNIER</span></h4>
               <p class="player-tag serif-italic">— précision technique, exécution</p>
               <p class="player-text">
-                Fabrice conçoit et développe des solutions SAP sur mesure, avec une approche très technique et une vraie culture du <strong>Cloud</strong>. Son mantra est simple : <strong>S/4HANA est le cœur</strong> du système, et on ne doit jamais l'oublier. Ici, chaque choix doit servir le métier, pas l'inverse.
+                Fabrice conçoit et développe des solutions SAP sur mesure, avec une approche très technique et une vraie culture du <strong>Cloud</strong>. Son mantra est simple : <strong>S/4HANA est le cœur</strong> du système, et on ne doit jamais l'oublier. On ne fait pas du développement « pour faire joli ». Ici, chaque choix doit servir le métier, pas l'inverse.
               </p>
               <p class="player-text">
-                Pour garder sa maîtrise, Fabrice aime avoir un pied dehors : les <strong>voyages</strong> sont son terrain de jeu pour prendre du recul, s'inspirer et revenir avec de nouvelles idées.
+                Curieux et très <strong>geek</strong>, Fabrice est toujours à fond sur les nouvelles technologies : il teste, explore et challenge les tendances du moment, avec un œil particulièrement affûté sur les usages <strong>IA</strong>.
               </p>
             </div>
           </article>
@@ -534,12 +519,8 @@ const stats = [
                 <dd><a href="mailto:contact@oria-solutions.fr">contact@oria-solutions.fr</a></dd>
               </div>
               <div>
-                <dt>Téléphone</dt>
-                <dd>+33 (0)X XX XX XX XX</dd>
-              </div>
-              <div>
                 <dt>Siège</dt>
-                <dd>Strasbourg, France</dd>
+                <dd>Lyon, France</dd>
               </div>
               <div>
                 <dt>LinkedIn</dt>
@@ -629,7 +610,7 @@ const stats = [
         <div class="footer-top">
           <div class="footer-brand">
             <img
-              src="/assets/img/oria-logo.svg"
+              src="/assets/img/logo-horizontal.png"
               alt="ORIA Solutions"
               class="footer-brand-logo"
             />
@@ -656,7 +637,7 @@ const stats = [
           </div>
           <div class="col">
             <h5>Coordonnées</h5>
-            <p>Strasbourg, France<br>Interventions internationales</p>
+            <p>Lyon, France<br>Interventions internationales</p>
           </div>
         </div>
 
@@ -751,7 +732,7 @@ const stats = [
   color: var(--ink);
 }
 .brand-logo {
-  height: 38px;
+  height: 56px;
   width: auto;
   display: block;
 }
@@ -774,13 +755,13 @@ const stats = [
   display: none;
   padding: 11px 22px;
   border-radius: 999px;
-  background: var(--ink);
+  background: var(--brand-blue);
   color: var(--bone);
   font-size: 13.5px;
   font-weight: 500;
   transition: background .2s ease;
 }
-.nav-cta:hover { background: var(--rust); }
+.nav-cta:hover { background: var(--brand-navy); }
 
 @media (min-width: 920px) {
   .nav-links { display: inline-flex; align-items: center; }
@@ -952,6 +933,9 @@ const stats = [
 /* ============ APPROCHE ============ */
 .approche { background: var(--bone); }
 
+.sec-intro-blue { color: var(--brand-blue); }
+.play-grid-spaced { margin-top: clamp(2.5rem, 5vw, 4rem); }
+
 .play-grid {
   display: grid;
   gap: clamp(2rem, 4vw, 3.5rem);
@@ -1045,12 +1029,14 @@ const stats = [
 }
 
 .deep {
-  border-top: 1px solid var(--ice-line);
-  border-bottom: 1px solid var(--ice-line);
-  padding: clamp(2rem, 4vw, 3.5rem) 0;
+  background: #fff;
+  border: 1px solid var(--ice-line);
+  border-radius: 18px;
+  padding: clamp(2rem, 4vw, 3.5rem);
   margin-bottom: 24px;
   display: grid;
   gap: clamp(2rem, 4vw, 4rem);
+  box-shadow: 0 12px 30px rgba(15,20,36,0.04);
 }
 @media (min-width: 880px) {
   .deep { grid-template-columns: 1fr 1.4fr; }
@@ -1086,7 +1072,7 @@ const stats = [
   padding: 7px 14px;
   border-radius: 999px;
   border: 1px solid var(--ice-line);
-  background: #fff;
+  background: var(--ice);
   color: var(--ink-soft);
   font-size: 13px;
 }
@@ -1301,7 +1287,7 @@ const stats = [
 .testi-foot {
   display: flex; align-items: end; justify-content: space-between;
   gap: 16px;
-  padding-right: 76px;
+  padding-right: 116px;
 }
 .testi-cite { display: grid; gap: 4px; }
 .testi-name {
@@ -1320,36 +1306,36 @@ const stats = [
   --notch: 14px;
   position: absolute;
   right: 0; bottom: 0;
-  width: 92px; height: 92px;
+  width: 132px; height: 132px;
   padding: var(--notch) 0 0 var(--notch);
   background: var(--cream);
-  border-top-left-radius: 18px;
+  border-top-left-radius: 22px;
   display: flex; align-items: center; justify-content: center;
 }
 .testi-mark::before,
 .testi-mark::after {
   content: '';
   position: absolute;
-  width: 18px; height: 18px;
+  width: 22px; height: 22px;
   background: var(--cream);
   pointer-events: none;
 }
 .testi-mark::before {
-  top: -18px; left: 0;
-  -webkit-mask: radial-gradient(circle at 0 100%, transparent 18px, #000 18.5px);
-          mask: radial-gradient(circle at 0 100%, transparent 18px, #000 18.5px);
+  top: -22px; left: 0;
+  -webkit-mask: radial-gradient(circle at 0 100%, transparent 22px, #000 22.5px);
+          mask: radial-gradient(circle at 0 100%, transparent 22px, #000 22.5px);
 }
 .testi-mark::after {
-  left: -18px; bottom: 0;
-  -webkit-mask: radial-gradient(circle at 100% 0, transparent 18px, #000 18.5px);
-          mask: radial-gradient(circle at 100% 0, transparent 18px, #000 18.5px);
+  left: -22px; bottom: 0;
+  -webkit-mask: radial-gradient(circle at 100% 0, transparent 22px, #000 22.5px);
+          mask: radial-gradient(circle at 100% 0, transparent 22px, #000 22.5px);
 }
 .testi-mark :deep(img) {
   width: 100%; height: 100%;
   object-fit: contain;
   background: #fff;
-  border-radius: 10px;
-  padding: 8px;
+  border-radius: 12px;
+  padding: 10px;
 }
 
 .stats {
@@ -1374,10 +1360,10 @@ const stats = [
   font-size: clamp(54px, 6vw, 84px);
   line-height: 1;
   letter-spacing: -0.02em;
-  color: var(--ink);
+  color: var(--brand-blue);
   margin-bottom: 14px;
 }
-.stat-num em { font-style: italic; color: var(--rust); }
+.stat-num em { font-style: italic; color: var(--brand-cyan); }
 .stat-label {
   font-size: 13.5px;
   color: var(--ink-soft);
@@ -1502,20 +1488,6 @@ const stats = [
   background: var(--cream);
 }
 .player-photo :deep(img) { width: 100%; height: 100%; object-fit: cover; }
-.player-photo::after {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(180deg, transparent 55%, rgba(28,24,20,0.55) 100%);
-}
-.jersey {
-  position: absolute;
-  right: 24px;
-  bottom: 18px;
-  font-size: clamp(72px, 10vw, 132px);
-  line-height: 1;
-  color: rgba(255,247,235,0.92);
-  z-index: 1;
-}
 
 .player-meta { display: grid; gap: 14px; }
 .player-role {
@@ -1531,6 +1503,14 @@ const stats = [
   font-size: clamp(36px, 4vw, 52px);
   line-height: 1;
   letter-spacing: -0.02em;
+}
+.player-name-last {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-size: 0.78em;
+  margin-left: 0.25em;
 }
 .player-tag {
   font-size: clamp(18px, 2vw, 22px);
@@ -1784,7 +1764,7 @@ const stats = [
   display: inline-flex; align-items: center;
 }
 .footer-brand-logo {
-  height: 42px;
+  height: 52px;
   width: auto;
   display: block;
 }
