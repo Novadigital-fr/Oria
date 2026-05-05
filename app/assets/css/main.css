@@ -10,6 +10,7 @@
   --section-y: clamp(4rem, 9vw, 8rem);
   --radius: 14px;
 
+  /* --font-sans: "Century Gothic", "Apple Gothic", "URW Gothic", "ITC Avant Garde Gothic", "Avant Garde", "Futura", ui-sans-serif, sans-serif; */
   --font-sans: "Inter Tight", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-serif: "Instrument Serif", "Iowan Old Style", "Apple Garamond", Baskerville, "Times New Roman", Times, serif;
 }

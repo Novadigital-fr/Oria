@@ -81,7 +81,7 @@ const iaSteps = [
 
 const stats = [
   { n: '25', suffix: '+', label: 'Années d\'expérience cumulée' },
-  { n: '35', label: 'Projets réalisés' },
+  { n: '35', suffix: '+', label: 'Projets réalisés' },
   { n: '9', label: 'Implémentations S/4HANA Greenfield' },
   { n: '3', label: 'Conversions S/4HANA Brownfield' }
 ]
@@ -101,10 +101,14 @@ const stats = [
         <div class="nav-links">
           <a href="#approche">Approche</a>
           <a href="#expertises">Expertises</a>
-          <a href="#ia">IA</a>
+          <a href="#ia">Intelligence artificielle</a>
+          <a href="#references">Références</a>
           <a href="#equipe">Équipe</a>
         </div>
-        <a href="#contact" class="nav-cta">Nous contacter</a>
+        <a href="#contact" class="nav-cta">
+          Nous contacter
+          <span class="btn-arrow" aria-hidden="true">→</span>
+        </a>
       </div>
     </nav>
 
@@ -120,7 +124,7 @@ const stats = [
             Expertise fonctionnelle, développement sur mesure, vision terrain : ORIA Solutions accompagne les entreprises industrielles à chaque étape de leurs projets SAP &amp; S/4HANA.
           </p>
           <div class="hero-actions">
-            <a class="btn btn-dark" href="#contact">
+            <a class="btn btn-ghost" href="#contact">
               Nous contacter
               <span class="btn-arrow" aria-hidden="true">→</span>
             </a>
@@ -130,7 +134,7 @@ const stats = [
         <div class="hero-photo reveal">
           <div class="hero-photo-frame">
             <NuxtImg
-              src="/assets/img/Accueil.png"
+              src="/assets/img/Code.png"
               alt=""
               width="1400"
               height="1600"
@@ -234,15 +238,6 @@ const stats = [
           </div>
         </article>
 
-        <div class="band reveal">
-          <NuxtImg
-            src="/assets/img/webdev.webp"
-            alt=""
-            width="2400"
-            height="1100"
-            loading="lazy"
-          />
-        </div>
 
         <article class="deep reveal">
           <header>
@@ -274,90 +269,50 @@ const stats = [
         <header class="sec-head reveal">
           <span class="sec-num serif-italic">03</span>
           <div>
-            <h2 class="sec-eyebrow">IA</h2>
-            <h3 class="sec-title">L'IA pour aller <em>plus loin.</em></h3>
+            <h2 class="sec-eyebrow">Intelligence artificielle</h2>
+            <h3 class="sec-title sec-title-sm">L'IA, <em>partie intégrante</em> de SAP pour aller plus loin.</h3>
           </div>
         </header>
 
         <div class="ia-grid">
-        <div class="ia-text reveal">
-          <p class="ia-lede">
-            Avant de déployer l'IA, il faut identifier les bons cas d'usage. Analyser l'existant, détecter les frictions, puis proposer des cas métiers crédibles et activables.
-          </p>
-          <a href="#contact" class="btn btn-ghost ia-cta">Échanger sur un cas d'usage</a>
-
-          <div class="ia-features">
-            <div class="ia-feature">
-              <span class="ia-feature-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                  <rect x="3" y="3" width="18" height="18" rx="2"/>
-                  <path d="M3 9h18M9 3v18"/>
-                </svg>
-              </span>
-              <h4>Cadrage des cas d'usage</h4>
-              <p>On part du métier, pas de la techno. Identifier les frictions à forte valeur avant de coder.</p>
+          <div class="ia-photo reveal">
+            <div class="ia-photo-frame">
+              <NuxtImg
+                src="/assets/img/webdev.webp"
+                alt=""
+                width="1400"
+                height="1700"
+                loading="lazy"
+              />
             </div>
-            <div class="ia-feature">
-              <span class="ia-feature-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                  <path d="M4 7h16M4 12h10M4 17h16"/>
-                  <circle cx="17" cy="12" r="2"/>
-                </svg>
-              </span>
-              <h4>Intégration native BTP</h4>
-              <p>Joule, Document Information Extractor, ML embarqué — branchés au cœur de S/4HANA, pas à côté.</p>
+            <div class="ia-photo-tag" aria-hidden="true">
+              <span class="ia-photo-tag-dot"></span>
+              <span>Joule · DOX · ML embarqué</span>
             </div>
           </div>
-        </div>
 
-        <div class="ia-photo reveal">
-          <div class="ia-photo-frame">
-            <NuxtImg
-              src="/assets/img/webdev.webp"
-              alt=""
-              width="1400"
-              height="1400"
-              loading="lazy"
-            />
-          </div>
+          <div class="ia-content">
+            <p class="ia-lede reveal">
+              Avant de déployer l'IA, il faut identifier les bons cas d'usage. Analyser l'existant, détecter les frictions, puis proposer des cas métiers crédibles et activables.
+            </p>
 
-          <div class="phase-card" aria-hidden="true">
-            <div class="phase-card-head">
-              <span class="phase-card-label">Phases du projet IA</span>
-              <span class="phase-card-chev" aria-hidden="true">
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
-                  <path d="M4 10l4-4 4 4"/>
-                </svg>
-              </span>
+            <div class="ia-approach">
+              <span class="ia-approach-eyebrow reveal">— Notre approche</span>
+              <ol class="ia-timeline reveal-stagger">
+                <li v-for="(s, i) in iaSteps" :key="i">
+                  <span class="ia-timeline-num serif-italic">0{{ i + 1 }}</span>
+                  <span class="ia-timeline-text">{{ s }}</span>
+                </li>
+              </ol>
             </div>
-            <ul class="phase-list">
-              <li v-for="(s, i) in iaSteps" :key="i" :class="{ 'is-active': i === 0 }">
-                <span class="phase-icon" aria-hidden="true">
-                  <svg v-if="i === 0" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4">
-                    <circle cx="8" cy="8" r="6"/>
-                    <path d="M8 4v4l2.5 1.5"/>
-                  </svg>
-                  <svg v-else-if="i === 1" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4">
-                    <circle cx="8" cy="8" r="5.5"/>
-                    <circle cx="8" cy="8" r="2"/>
-                    <path d="M8 1v2M8 13v2M1 8h2M13 8h2"/>
-                  </svg>
-                  <svg v-else-if="i === 2" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4">
-                    <circle cx="7" cy="7" r="4.5"/>
-                    <path d="M10.5 10.5l3 3"/>
-                  </svg>
-                  <svg v-else-if="i === 3" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4">
-                    <path d="M8 2l-1.8 5.5h-4.2l3.4 2.5-1.3 4 3.9-2.7 3.9 2.7-1.3-4 3.4-2.5h-4.2z"/>
-                  </svg>
-                  <svg v-else viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4">
-                    <path d="M2 13V3M2 13h12M5 11l3-3 2 2 4-4"/>
-                  </svg>
-                </span>
-                <span class="phase-text">{{ s }}</span>
-              </li>
-            </ul>
+
+            <div class="ia-foot reveal">
+              <a href="#contact" class="btn btn-ghost">
+                Échanger sur un cas d'usage
+                <span class="btn-arrow" aria-hidden="true">→</span>
+              </a>
+            </div>
           </div>
-        </div>
         </div>
       </div>
     </section>
@@ -641,7 +596,6 @@ const stats = [
           </div>
         </div>
 
-        <div class="footer-mega serif-italic">Oria — 2026</div>
         <div class="footer-bottom">
           <span>© 2026 ORIA Solutions · Tous droits réservés</span>
           <span>Mentions légales · Confidentialité</span>
@@ -674,6 +628,7 @@ const stats = [
   --gutter: clamp(1.25rem, 3vw, 3rem);
   --section-y: clamp(5rem, 11vw, 10rem);
 
+  /* --font-sans: "Century Gothic", "Apple Gothic", "URW Gothic", "ITC Avant Garde Gothic", "Avant Garde", "Futura", ui-sans-serif, sans-serif; */
   --font-sans: "Inter Tight", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-serif: "Instrument Serif", "Iowan Old Style", Georgia, "Times New Roman", serif;
 
@@ -732,7 +687,7 @@ const stats = [
   color: var(--ink);
 }
 .brand-logo {
-  height: 56px;
+  height: 72px;
   width: auto;
   display: block;
 }
@@ -746,13 +701,19 @@ const stats = [
 }
 .nav-links a {
   position: relative;
-  padding: 4px 0;
-  transition: color .2s ease;
+  padding: 8px 14px;
+  border-radius: 999px;
+  transition: color .2s ease, background-color .2s ease;
 }
-.nav-links a:hover { color: var(--rust); }
+.nav-links a:hover {
+  color: var(--rust);
+  background: rgba(0, 0, 0, 0.04);
+}
 
 .nav-cta {
   display: none;
+  align-items: center;
+  gap: 10px;
   padding: 11px 22px;
   border-radius: 999px;
   background: var(--brand-blue);
@@ -762,6 +723,8 @@ const stats = [
   transition: background .2s ease;
 }
 .nav-cta:hover { background: var(--brand-navy); }
+.nav-cta .btn-arrow { background: var(--bone); color: var(--brand-blue); }
+.nav-cta:hover .btn-arrow { color: var(--brand-navy); }
 
 @media (min-width: 920px) {
   .nav-links { display: inline-flex; align-items: center; }
@@ -780,25 +743,37 @@ const stats = [
   transition: background .2s ease, transform .2s ease, color .2s ease, border-color .2s ease;
 }
 .btn:hover { transform: translateY(-1px); }
-.btn-dark { background: var(--ink); color: #fff; }
-.btn-dark:hover { background: var(--brand-blue); }
 .btn-arrow {
   display: inline-flex; align-items: center; justify-content: center;
   width: 22px; height: 22px;
   border-radius: 999px;
   background: var(--bone);
-  color: var(--ink);
+  color: var(--brand-blue);
   font-size: 12px;
   margin-right: -8px;
+  transition: color .2s ease, background .2s ease;
 }
-.btn-ghost {
-  background: transparent;
-  color: var(--ink);
-  border: 1px solid var(--line);
-}
-.btn-ghost:hover { background: var(--ink); color: var(--bone); border-color: var(--ink); }
-.btn-rust { background: var(--brand-blue); color: #fff; border-radius: 8px; }
+
+/* Primary (important): blue → navy */
+.btn-dark { background: var(--brand-blue); color: #fff; }
+.btn-dark:hover { background: var(--brand-navy); }
+.btn-dark .btn-arrow { color: var(--brand-blue); }
+.btn-dark:hover .btn-arrow { color: var(--brand-navy); }
+
+.btn-rust { background: var(--brand-blue); color: #fff; }
 .btn-rust:hover { background: var(--brand-navy); }
+.btn-rust .btn-arrow { color: var(--brand-blue); }
+.btn-rust:hover .btn-arrow { color: var(--brand-navy); }
+
+/* Secondary (less important): navy → blue */
+.btn-ghost {
+  background: var(--brand-navy);
+  color: #fff;
+  border: 1px solid var(--brand-navy);
+}
+.btn-ghost:hover { background: var(--brand-blue); border-color: var(--brand-blue); }
+.btn-ghost .btn-arrow { color: var(--brand-navy); }
+.btn-ghost:hover .btn-arrow { color: var(--brand-blue); }
 
 /* ============ SECTION HEAD ============ */
 .sec-head {
@@ -847,7 +822,7 @@ const stats = [
 .hero {
   min-height: calc(100svh - 80px);
   padding-top: clamp(2rem, 4vw, 3rem);
-  padding-bottom: clamp(2rem, 4vw, 3rem);
+  padding-bottom: clamp(4rem, 8vw, 7rem);
 }
 
 .hero-grid {
@@ -920,7 +895,7 @@ const stats = [
 .hero-photo { position: relative; }
 .hero-photo-frame {
   position: relative;
-  max-height: calc(100svh - 160px);
+  max-height: calc(100svh - 260px);
   border-radius: 18px;
   overflow: hidden;
   background: var(--cream);
@@ -979,9 +954,9 @@ const stats = [
   background: transparent;
 }
 .tag-list li.tag-solid {
-  background: var(--ink);
+  background: var(--brand-navy);
   color: var(--bone);
-  border-color: var(--ink);
+  border-color: var(--brand-navy);
 }
 
 /* ============ EXPERTISES ============ */
@@ -997,6 +972,9 @@ const stats = [
 .expertises .sec-eyebrow { color: var(--ink-mute); }
 .expertises .sec-title em { color: var(--brand-blue); }
 .expertises .sec-intro { color: var(--ink-soft); }
+.expertises .sec-head { border-bottom: 0; }
+.expertises .phases { border-top: 0; }
+.expertises .phases li { border-right: 0; }
 
 .phases {
   display: grid;
@@ -1208,6 +1186,119 @@ const stats = [
 .phase-list li.is-active .phase-icon { color: var(--brand-blue); }
 .phase-icon svg { width: 16px; height: 16px; }
 .phase-text { font-weight: 500; }
+
+/* IA — proposition 3 (avec photo) */
+.ia .sec-title em { color: var(--brand-blue); }
+
+.ia .ia-grid {
+  display: grid;
+  gap: clamp(2.5rem, 5vw, 4.5rem);
+  align-items: start;
+}
+@media (min-width: 980px) {
+  .ia .ia-grid { grid-template-columns: 5fr 6fr; align-items: start; }
+}
+
+.ia .ia-photo {
+  position: sticky;
+  top: 100px;
+  align-self: start;
+}
+.ia .ia-photo-frame {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--cream);
+  aspect-ratio: 4 / 5;
+  max-height: 70vh;
+  box-shadow: 0 30px 60px -30px rgba(0,0,127,0.25);
+}
+.ia .ia-photo-frame :deep(img) {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.ia-photo-tag {
+  position: absolute;
+  bottom: 18px;
+  left: 18px;
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,0.94);
+  backdrop-filter: blur(10px);
+  padding: 9px 16px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--brand-navy);
+  border: 1px solid rgba(255,255,255,0.6);
+  box-shadow: 0 6px 20px -8px rgba(0,0,127,0.25);
+}
+.ia-photo-tag-dot {
+  width: 8px; height: 8px;
+  border-radius: 999px;
+  background: var(--brand-blue);
+  box-shadow: 0 0 0 4px rgba(0,97,234,0.18);
+}
+
+.ia-content {
+  display: grid;
+  gap: clamp(2rem, 3.5vw, 2.75rem);
+  align-content: start;
+}
+.ia-content .ia-lede {
+  font-size: 19px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 56ch;
+}
+
+.ia-approach { display: grid; gap: 20px; }
+.ia-approach-eyebrow {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--brand-blue);
+}
+
+.ia-timeline {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+}
+.ia-timeline li {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 20px;
+  align-items: center;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--ice-line);
+  transition: padding-left .25s ease, color .25s ease;
+}
+.ia-timeline li:first-child { padding-top: 4px; }
+.ia-timeline li:last-child { border-bottom: 0; }
+.ia-timeline li:hover { padding-left: 10px; }
+.ia-timeline-num {
+  font-size: 30px;
+  line-height: 1;
+  color: var(--brand-blue);
+  transition: color .25s ease;
+}
+.ia-timeline li:hover .ia-timeline-num { color: var(--brand-navy); }
+.ia-timeline-text {
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.ia-foot { display: flex; }
+
+@media (max-width: 979px) {
+  .ia .ia-photo { position: relative; top: auto; }
+}
 
 @media (max-width: 720px) {
   .ia-features { grid-template-columns: 1fr; }
@@ -1482,12 +1573,18 @@ const stats = [
 .player { display: grid; gap: 28px; }
 .player-photo {
   position: relative;
-  aspect-ratio: 1 / 1;
+  height: clamp(320px, 36vw, 520px);
   border-radius: 14px;
   overflow: hidden;
   background: var(--cream);
 }
-.player-photo :deep(img) { width: 100%; height: 100%; object-fit: cover; }
+.player-photo :deep(picture),
+.player-photo :deep(img) {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
 .player-meta { display: grid; gap: 14px; }
 .player-role {
@@ -1699,10 +1796,11 @@ const stats = [
   transition: color .2s ease;
 }
 .faq-q span:first-child {
-  font-family: var(--font-serif);
-  font-size: clamp(20px, 2.2vw, 26px);
-  line-height: 1.2;
-  letter-spacing: -0.01em;
+  font-family: var(--font-sans);
+  font-size: clamp(18px, 1.8vw, 21px);
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.005em;
 }
 .faq-item:hover .faq-q span:first-child { color: var(--rust); }
 
@@ -1764,7 +1862,7 @@ const stats = [
   display: inline-flex; align-items: center;
 }
 .footer-brand-logo {
-  height: 52px;
+  height: 96px;
   width: auto;
   display: block;
 }
