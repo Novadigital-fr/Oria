@@ -16,6 +16,7 @@ export default defineNuxtConfig({
         { name: 'description', content: 'Oria — studio indépendant. Stratégie, identité et mise en œuvre pour des marques qui veulent compter.' }
       ],
       link: [
+        { rel: 'icon', type: 'image/svg+xml', href: '/assets/img/oria-logo.svg' },
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Inter+Tight:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap' }
