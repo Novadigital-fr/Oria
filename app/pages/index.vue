@@ -1,6 +1,6 @@
 <script setup lang="ts">
 useHead({
-  title: 'ORIA Solutions — Expertise SAP & S/4HANA',
+  title: 'ORIA Solutions - Expertise SAP & S/4HANA',
   meta: [
     { name: 'description', content: 'ORIA Solutions accompagne les entreprises industrielles sur SAP & S/4HANA. Fonctionnel, technique et cloud, avec sens du jeu collectif.' }
   ]
@@ -38,30 +38,60 @@ const toggleFaq = (i: number) => { openFaq.value = openFaq.value === i ? null : 
 const faqItems = [
   {
     q: 'Travaillez-vous uniquement sur des projets complets ?',
-    a: '[À compléter] Réponse courte indiquant les modalités d\'intervention : missions longues, audits, expertises ponctuelles, renforts d\'équipe projet.'
+    a: 'L\'équipe est en train de finaliser son plan de match pour vous apporter la meilleure réponse.'
   },
   {
     q: 'Intervenez-vous sur S/4HANA ?',
-    a: '[À compléter] Préciser le périmètre S/4HANA couvert : Greenfield, Brownfield, optimisation d\'existant.'
+    a: 'L\'équipe est en train de finaliser son plan de match pour vous apporter la meilleure réponse.'
   },
   {
     q: 'Faites-vous uniquement du développement ?',
-    a: '[À compléter] Rappeler que l\'équipe couvre à la fois le fonctionnel et le développement sur-mesure.'
+    a: 'L\'équipe est en train de finaliser son plan de match pour vous apporter la meilleure réponse.'
   },
   {
     q: 'L\'IA fait-elle déjà partie de vos offres ?',
-    a: '[À compléter] Expliquer l\'approche IA : cadrage des cas d\'usage, intégration Joule / DOX / ML embarqué.'
+    a: 'L\'équipe est en train de finaliser son plan de match pour vous apporter la meilleure réponse.'
   },
   {
     q: 'Travaillez-vous uniquement pour des clients industriels ?',
-    a: '[À compléter] Préciser les secteurs adressés et l\'ouverture à d\'autres filières.'
+    a: 'L\'équipe est en train de finaliser son plan de match pour vous apporter la meilleure réponse.'
   }
 ]
 
+// Clé d'accès Web3Forms (gratuite sur https://web3forms.com, à créer avec contact@oria-solutions.fr).
+// Cette clé est destinée à être publique côté client — c'est le fonctionnement prévu par Web3Forms.
+const WEB3FORMS_ACCESS_KEY = 'REMPLACER_PAR_VOTRE_CLE'
+
 const submitNote = ref('')
-const onSubmit = (e: Event) => {
+const submitting = ref(false)
+const onSubmit = async (e: Event) => {
   e.preventDefault()
-  submitNote.value = 'Message envoyé — merci.'
+  const form = e.target as HTMLFormElement
+  const data = new FormData(form)
+  const get = (k: string) => (data.get(k) ?? '').toString().trim()
+  const fullName = `${get('fn')} ${get('ln')}`.trim()
+  const topic = get('topic')
+
+  data.append('access_key', WEB3FORMS_ACCESS_KEY)
+  data.append('from_name', 'Site ORIA Solutions')
+  data.append('subject', `Contact site${topic ? ` - ${topic}` : ''}${fullName ? ` - ${fullName}` : ''}`)
+
+  submitting.value = true
+  submitNote.value = 'Envoi en cours…'
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data })
+    const json = await res.json()
+    if (json.success) {
+      submitNote.value = 'Message envoyé, merci. Nous revenons vers vous rapidement.'
+      form.reset()
+    } else {
+      submitNote.value = "Échec de l'envoi. Réessayez ou écrivez à contact@oria-solutions.fr."
+    }
+  } catch {
+    submitNote.value = 'Erreur réseau. Réessayez ou écrivez à contact@oria-solutions.fr.'
+  } finally {
+    submitting.value = false
+  }
 }
 
 const phases = [
@@ -116,7 +146,7 @@ const stats = [
     <section class="hero">
       <div class="wrap hero-grid">
         <div class="hero-text reveal">
-          <span class="hero-pill">ORIA Solutions — Saison 2026</span>
+          <span class="hero-pill">ORIA Solutions - Saison 2026</span>
           <h1 class="hero-title">
             Nous faisons avancer vos <em>projets SAP</em> avec précision, engagement et sens du jeu collectif.
           </h1>
@@ -162,7 +192,7 @@ const stats = [
 
         <div class="play-grid play-grid-spaced reveal-stagger">
           <article class="play">
-            <div class="play-tag">Play 01 — Fonctionnel</div>
+            <div class="play-tag">Play 01 - Fonctionnel</div>
             <h4>Lecture métier &amp; expertise fonctionnelle</h4>
             <p>
               Spécialisée sur les modules <strong>QM</strong> et <strong>eWM</strong>, ORIA Solutions accompagne les équipes dans l'analyse de leurs processus, la compréhension des irritants terrain et la traduction des besoins métier dans SAP.
@@ -178,7 +208,7 @@ const stats = [
           </article>
 
           <article class="play">
-            <div class="play-tag">Play 02 — Technique</div>
+            <div class="play-tag">Play 02 - Technique</div>
             <h4>Développement SAP sur mesure</h4>
             <p>
               SAP propose un cadre robuste, mais chaque environnement industriel a ses spécificités. Lorsque le standard atteint ses limites, nous concevons des développements sur mesure.
@@ -219,7 +249,7 @@ const stats = [
 
         <article class="deep reveal">
           <header>
-            <span class="deep-eyebrow">— Au cœur de l'ERP</span>
+            <span class="deep-eyebrow">- Au cœur de l'ERP</span>
             <h4>L'excellence <em>S/4HANA.</em></h4>
           </header>
           <div class="deep-body">
@@ -227,12 +257,12 @@ const stats = [
               <strong>Conviction :</strong> la technologie n'a de sens que si elle facilite le quotidien de l'utilisateur métier. La quasi-totalité de vos flux critiques se déroulent dans S/4HANA : nous vous accompagnons sur l'implémentation et l'optimisation de vos processus QM et eWM, en tirant parti des standards SAP les plus récents.
             </p>
             <p>
-              Pour éviter l'ancien code complexe et coûteux à maintenir, nous privilégions une approche moderne, et exploitons le Machine Learning embarqué quand il apporte un gain concret — ERP plus intelligent et réactif.
+              Pour éviter l'ancien code complexe et coûteux à maintenir, nous privilégions une approche moderne, et exploitons le Machine Learning embarqué quand il apporte un gain concret, ERP plus intelligent et réactif.
             </p>
             <ul class="tech">
-              <li>RAP (RESTful ABAP)</li>
+              <li class="key">RAP (RESTful ABAP)</li>
               <li>Modélisation CDS</li>
-              <li>Applications Fiori natives</li>
+              <li class="key">Applications Fiori natives</li>
               <li>ML embarqué</li>
             </ul>
           </div>
@@ -241,7 +271,7 @@ const stats = [
 
         <article class="deep reveal">
           <header>
-            <span class="deep-eyebrow">— Autour de l'ERP</span>
+            <span class="deep-eyebrow">- Autour de l'ERP</span>
             <h4>L'agilité avec <em>SAP BTP</em> (Cloud).</h4>
           </header>
           <div class="deep-body">
@@ -253,9 +283,9 @@ const stats = [
             </p>
             <ul class="tech">
               <li>Business Application Studio</li>
-              <li>SAP Build</li>
+              <li class="key">SAP Build</li>
               <li>Portail entreprise</li>
-              <li>Joule</li>
+              <li class="key">Joule</li>
               <li>Document Information Extractor</li>
             </ul>
           </div>
@@ -297,7 +327,7 @@ const stats = [
             </p>
 
             <div class="ia-approach">
-              <span class="ia-approach-eyebrow reveal">— Notre approche</span>
+              <span class="ia-approach-eyebrow reveal">- Notre approche</span>
               <ol class="ia-timeline reveal-stagger">
                 <li v-for="(s, i) in iaSteps" :key="i">
                   <span class="ia-timeline-num serif-italic">0{{ i + 1 }}</span>
@@ -421,13 +451,13 @@ const stats = [
             </div>
             <div class="player-meta">
               <div class="player-role">L'attaquante</div>
-              <h4 class="player-name">Delphine <span class="player-name-last">PFLEGER</span></h4>
-              <p class="player-tag serif-italic">— lecture métier, cadrage fonctionnel</p>
+              <h4 class="player-name">Delphine <span class="player-name-last">Pfleger</span></h4>
+              <p class="player-tag serif-italic">- lecture métier, cadrage fonctionnel</p>
               <p class="player-text">
-                Delphine accompagne les équipes industrielles dans la lecture du besoin métier et la traduction des enjeux terrain dans SAP. Spécialiste des modules <strong>QM</strong> et <strong>eWM</strong>, elle intervient du cadrage fonctionnel aux ateliers de conception, avec une attention constante à la cohérence des processus et à l'adoption. Elle accompagne aussi les transformations <strong>S/4HANA</strong>, en aidant à arbitrer, prioriser et sécuriser la trajectoire projet.
+                Delphine accompagne les équipes industrielles dans la lecture du besoin métier et la traduction des enjeux terrain dans SAP. Spécialiste des modules <strong>QM</strong> et <strong>Logistiques (MM, eWM)</strong>, elle intervient du cadrage fonctionnel aux ateliers de conception, avec une attention constante à la cohérence des processus et à l'adoption. Elle accompagne aussi les transformations <strong>S/4HANA</strong>, en aidant à arbitrer, prioriser et sécuriser la trajectoire projet.
               </p>
               <p class="player-text">
-                Mais ne vous trompez pas — <strong>joueuse de hockey sur glace semi-professionnelle depuis 15 ans,</strong> pour Delphine chaque projet est un match qu'elle aime remporter haut la main.
+                Mais ne vous trompez pas, <strong>joueuse de hockey sur glace semi-professionnelle depuis 25 ans,</strong> pour Delphine chaque projet est un match qu'elle aime remporter haut la main.
               </p>
             </div>
           </article>
@@ -444,8 +474,8 @@ const stats = [
             </div>
             <div class="player-meta">
               <div class="player-role">Le défenseur</div>
-              <h4 class="player-name">Fabrice <span class="player-name-last">GARNIER</span></h4>
-              <p class="player-tag serif-italic">— précision technique, exécution</p>
+              <h4 class="player-name">Fabrice <span class="player-name-last">Garnier</span></h4>
+              <p class="player-tag serif-italic">- précision technique, exécution</p>
               <p class="player-text">
                 Fabrice conçoit et développe des solutions SAP sur mesure, avec une approche très technique et une vraie culture du <strong>Cloud</strong>. Son mantra est simple : <strong>S/4HANA est le cœur</strong> du système, et on ne doit jamais l'oublier. On ne fait pas du développement « pour faire joli ». Ici, chaque choix doit servir le métier, pas l'inverse.
               </p>
@@ -485,6 +515,7 @@ const stats = [
           </div>
 
           <form class="oria-form" @submit="onSubmit">
+            <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true" />
             <div class="row-2">
               <label>
                 Prénom
@@ -519,8 +550,8 @@ const stats = [
             </label>
             <div class="form-foot">
               <span class="form-note">{{ submitNote }}</span>
-              <button type="submit" class="btn btn-rust">
-                Envoyer
+              <button type="submit" class="btn btn-rust" :disabled="submitting">
+                {{ submitting ? 'Envoi…' : 'Envoyer' }}
                 <span class="btn-arrow" aria-hidden="true">→</span>
               </button>
             </div>
@@ -571,7 +602,7 @@ const stats = [
             />
           </div>
           <p class="footer-tag">
-            Expertise SAP &amp; S/4HANA pour l'industrie. Fonctionnel, technique et cloud — avec sens du jeu collectif.
+            Expertise SAP &amp; S/4HANA pour l'industrie. Fonctionnel, technique et cloud, avec sens du jeu collectif.
           </p>
         </div>
 
@@ -598,7 +629,7 @@ const stats = [
 
         <div class="footer-bottom">
           <span>© 2026 ORIA Solutions · Tous droits réservés</span>
-          <span>Mentions légales · Confidentialité</span>
+          <span><NuxtLink to="/mentions-legales" class="footer-legal-link">Mentions légales</NuxtLink> · Confidentialité</span>
         </div>
       </div>
     </footer>
@@ -1042,9 +1073,9 @@ const stats = [
 }
 .deep-body p + p { margin-top: 16px; }
 .deep-body strong { color: var(--ink); font-weight: 500; }
-.tech {
+.deep-body .tech {
   display: flex; flex-wrap: wrap; gap: 8px;
-  margin-top: 24px;
+  margin-top: 20px;
 }
 .tech li {
   padding: 7px 14px;
@@ -1053,6 +1084,11 @@ const stats = [
   background: var(--ice);
   color: var(--ink-soft);
   font-size: 13px;
+}
+.tech li.key {
+  background: var(--brand-navy);
+  border-color: var(--brand-navy);
+  color: #fff;
 }
 
 .band {
@@ -1187,7 +1223,7 @@ const stats = [
 .phase-icon svg { width: 16px; height: 16px; }
 .phase-text { font-weight: 500; }
 
-/* IA — proposition 3 (avec photo) */
+/* IA - proposition 3 (avec photo) */
 .ia .sec-title em { color: var(--brand-blue); }
 
 .ia .ia-grid {
@@ -1403,24 +1439,6 @@ const stats = [
   border-top-left-radius: 22px;
   display: flex; align-items: center; justify-content: center;
 }
-.testi-mark::before,
-.testi-mark::after {
-  content: '';
-  position: absolute;
-  width: 22px; height: 22px;
-  background: var(--cream);
-  pointer-events: none;
-}
-.testi-mark::before {
-  top: -22px; left: 0;
-  -webkit-mask: radial-gradient(circle at 0 100%, transparent 22px, #000 22.5px);
-          mask: radial-gradient(circle at 0 100%, transparent 22px, #000 22.5px);
-}
-.testi-mark::after {
-  left: -22px; bottom: 0;
-  -webkit-mask: radial-gradient(circle at 100% 0, transparent 22px, #000 22.5px);
-          mask: radial-gradient(circle at 100% 0, transparent 22px, #000 22.5px);
-}
 .testi-mark :deep(img) {
   width: 100%; height: 100%;
   object-fit: contain;
@@ -1602,12 +1620,10 @@ const stats = [
   letter-spacing: -0.02em;
 }
 .player-name-last {
-  font-family: var(--font-sans);
-  font-weight: 600;
+  font-family: var(--font-serif);
+  font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 0.02em;
-  font-size: 0.78em;
-  margin-left: 0.25em;
+  margin-left: 0.12em;
 }
 .player-tag {
   font-size: clamp(18px, 2vw, 22px);
@@ -1909,6 +1925,8 @@ const stats = [
   color: var(--ink-mute);
   font-weight: 500;
 }
+.footer-legal-link { transition: color .2s ease; }
+.footer-legal-link:hover { color: var(--brand-blue); }
 
 @media (max-width: 720px) {
   .sec-head { grid-template-columns: 1fr; gap: 18px; }
