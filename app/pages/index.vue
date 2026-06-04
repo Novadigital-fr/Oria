@@ -308,7 +308,7 @@ const stats = [
           <div class="ia-photo reveal">
             <div class="ia-photo-frame">
               <NuxtImg
-                src="/assets/img/webdev.webp"
+                src="/assets/img/image (1).png"
                 alt=""
                 width="1400"
                 height="1700"
@@ -361,7 +361,7 @@ const stats = [
         <div class="testi-row reveal-stagger">
           <article class="testi-photo">
             <NuxtImg
-              src="/assets/img/equipe.webp"
+              src="/assets/img/Ref Clients (1).png"
               alt=""
               width="900"
               height="1200"
@@ -465,7 +465,7 @@ const stats = [
           <article class="player">
             <div class="player-photo">
               <NuxtImg
-                src="/assets/img/Duo Fabrice.png"
+                src="/assets/img/Duo Fabrice (1).png"
                 alt="Portrait Fabrice Garnier"
                 width="900"
                 height="1125"
@@ -596,7 +596,7 @@ const stats = [
         <div class="footer-top">
           <div class="footer-brand">
             <img
-              src="/assets/img/logo-horizontal.png"
+              src="/assets/img/oria-logo.svg"
               alt="ORIA Solutions"
               class="footer-brand-logo"
             />
