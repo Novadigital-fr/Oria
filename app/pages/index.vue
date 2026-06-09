@@ -60,7 +60,7 @@ const faqItems = [
 
 // Clé d'accès Web3Forms (gratuite sur https://web3forms.com, à créer avec contact@oria-solutions.fr).
 // Cette clé est destinée à être publique côté client — c'est le fonctionnement prévu par Web3Forms.
-const WEB3FORMS_ACCESS_KEY = 'REMPLACER_PAR_VOTRE_CLE'
+const WEB3FORMS_ACCESS_KEY = 'a4bc0ca6-c306-4003-9686-84641806f293'
 
 const submitNote = ref('')
 const submitting = ref(false)
@@ -109,12 +109,14 @@ const iaSteps = [
   'Analyser et vous accompagner'
 ]
 
-const stats = [
-  { n: '25', suffix: '+', label: 'Années d\'expérience cumulée' },
-  { n: '35', suffix: '+', label: 'Projets réalisés' },
-  { n: '9', label: 'Implémentations S/4HANA Greenfield' },
-  { n: '3', label: 'Conversions S/4HANA Brownfield' }
-]
+// Données utilisées uniquement par la section Références (masquée pour la publication).
+// Décommenter en même temps que la section pour réafficher les chiffres clés.
+// const stats = [
+//   { n: '25', suffix: '+', label: 'Années d\'expérience cumulée' },
+//   { n: '35', suffix: '+', label: 'Projets réalisés' },
+//   { n: '9', label: 'Implémentations S/4HANA Greenfield' },
+//   { n: '3', label: 'Conversions S/4HANA Brownfield' }
+// ]
 </script>
 
 <template>
@@ -123,7 +125,7 @@ const stats = [
       <div class="nav-inner">
         <a href="#" class="brand" aria-label="ORIA Solutions">
           <img
-            src="/assets/img/logo-horizontal.png"
+            src="/assets/img/logo-horizontal.webp"
             alt="ORIA Solutions"
             class="brand-logo"
           />
@@ -132,7 +134,7 @@ const stats = [
           <a href="#approche">Approche</a>
           <a href="#expertises">Expertises</a>
           <a href="#ia">Intelligence artificielle</a>
-          <a href="#references">Références</a>
+          <!-- <a href="#references">Références</a> -->
           <a href="#equipe">Équipe</a>
         </div>
         <a href="#contact" class="nav-cta">
@@ -164,7 +166,7 @@ const stats = [
         <div class="hero-photo reveal">
           <div class="hero-photo-frame">
             <NuxtImg
-              src="/assets/img/Code.png"
+              src="/assets/img/Code.webp"
               alt=""
               width="1400"
               height="1600"
@@ -195,14 +197,14 @@ const stats = [
             <div class="play-tag">Play 01 - Fonctionnel</div>
             <h4>Lecture métier &amp; expertise fonctionnelle</h4>
             <p>
-              Spécialisée sur les modules <strong>QM</strong> et <strong>eWM</strong>, ORIA Solutions accompagne les équipes dans l'analyse de leurs processus, la compréhension des irritants terrain et la traduction des besoins métier dans SAP.
+              Spécialisée sur les modules <strong>QM</strong> et <strong>Logistiques (MM, eWM)</strong>, ORIA Solutions accompagne les équipes dans l'analyse de leurs processus, la compréhension des irritants terrain et la traduction des besoins métier dans SAP.
             </p>
             <ul class="tag-list">
               <li>Analyse des besoins métier</li>
               <li>Cadrage fonctionnel</li>
               <li>Ateliers &amp; workshops</li>
               <li class="tag-solid">QM</li>
-              <li class="tag-solid">eWM</li>
+              <li class="tag-solid">Logistiques (MM, eWM)</li>
               <li class="tag-solid">S/4HANA</li>
             </ul>
           </article>
@@ -308,7 +310,7 @@ const stats = [
           <div class="ia-photo reveal">
             <div class="ia-photo-frame">
               <NuxtImg
-                src="/assets/img/image (1).png"
+                src="/assets/img/image (1).webp"
                 alt=""
                 width="1400"
                 height="1700"
@@ -347,7 +349,10 @@ const stats = [
       </div>
     </section>
 
-    <!-- ============ REFERENCES ============ -->
+    <!-- ============ RÉFÉRENCES — SECTION MASQUÉE POUR LA PUBLICATION ============ -->
+    <!-- Pour réafficher : décommenter le bloc <section> ci-dessous, décommenter la const `stats`,
+         réafficher les liens "Références" (nav + footer), et remettre le numéro Équipe→05 (Références reprend le 04 ; la FAQ n'a plus de numéro). -->
+    <!--
     <section id="references" class="section refs">
       <div class="wrap">
         <header class="refs-head reveal">
@@ -361,7 +366,7 @@ const stats = [
         <div class="testi-row reveal-stagger">
           <article class="testi-photo">
             <NuxtImg
-              src="/assets/img/Ref Clients (1).png"
+              src="/assets/img/Ref Clients (1).webp"
               alt=""
               width="900"
               height="1200"
@@ -426,12 +431,13 @@ const stats = [
         </div>
       </div>
     </section>
+    -->
 
     <!-- ============ ÉQUIPE ============ -->
     <section id="equipe" class="section team">
       <div class="wrap">
         <header class="sec-head reveal">
-          <span class="sec-num serif-italic">05</span>
+          <span class="sec-num serif-italic">04</span>
           <div>
             <h2 class="sec-eyebrow">Équipe</h2>
             <h3 class="sec-title">Notre duo <em>sur le terrain.</em></h3>
@@ -442,7 +448,7 @@ const stats = [
           <article class="player">
             <div class="player-photo">
               <NuxtImg
-                src="/assets/img/Duo Delphine.jpg"
+                src="/assets/img/Duo Delphine.webp"
                 alt="Portrait Delphine Pfleger"
                 width="900"
                 height="1125"
@@ -465,7 +471,7 @@ const stats = [
           <article class="player">
             <div class="player-photo">
               <NuxtImg
-                src="/assets/img/Duo Fabrice (1).png"
+                src="/assets/img/Duo Fabrice (1).webp"
                 alt="Portrait Fabrice Garnier"
                 width="900"
                 height="1125"
@@ -564,7 +570,6 @@ const stats = [
     <section class="section faq">
       <div class="wrap faq-grid reveal">
         <header class="faq-head">
-          <span class="sec-num serif-italic">07</span>
           <h2 class="sec-eyebrow">FAQ</h2>
           <h3 class="sec-title sec-title-sm"><em>Petites</em> questions, vraies réponses.</h3>
           <p class="faq-side">
@@ -612,7 +617,7 @@ const stats = [
             <a href="#approche">Approche</a>
             <a href="#expertises">Expertises</a>
             <a href="#ia">IA</a>
-            <a href="#references">Références</a>
+            <!-- <a href="#references">Références</a> -->
             <a href="#equipe">Équipe</a>
           </div>
           <div class="col">
@@ -718,7 +723,7 @@ const stats = [
   color: var(--ink);
 }
 .brand-logo {
-  height: 72px;
+  height: 88px;
   width: auto;
   display: block;
 }
@@ -1605,6 +1610,8 @@ const stats = [
 }
 
 .player-meta { display: grid; gap: 14px; }
+/* Remonte le bloc texte de Fabrice (Le défenseur) pour équilibrer l'écart visuel avec Delphine */
+.duo .player:nth-child(2) .player-meta { margin-top: -16px; }
 .player-role {
   font-size: 12px;
   letter-spacing: 0.14em;
@@ -1790,7 +1797,6 @@ const stats = [
 @media (min-width: 880px) { .faq-grid { grid-template-columns: 1fr 1.4fr; align-items: start; } }
 
 .faq-head { display: grid; gap: 14px; }
-.faq-head .sec-num { font-size: clamp(64px, 8vw, 110px); }
 .faq-head .sec-eyebrow { margin-bottom: 0; }
 .faq-side {
   font-size: 13px;

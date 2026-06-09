@@ -1,0 +1,56 @@
+name: Déploiement serveur (SFTP)
+
+# Build + déploiement automatique à chaque mise à jour de la branche main.
+# Déclenchable aussi à la main depuis l'onglet "Actions" de GitHub.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Évite deux déploiements simultanés ; le plus récent l'emporte.
+concurrency:
+  group: deploy-production
+  cancel-in-progress: true
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Installation de Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Installation des dépendances
+        run: npm ci
+
+      - name: Génération du site statique
+        run: npm run generate
+
+      - name: Installation de lftp
+        run: sudo apt-get update && sudo apt-get install -y lftp
+
+      - name: Envoi vers le serveur (SFTP)
+        env:
+          SFTP_HOST: ${{ secrets.SFTP_HOST }}
+          SFTP_PORT: ${{ secrets.SFTP_PORT }}
+          SFTP_USERNAME: ${{ secrets.SFTP_USERNAME }}
+          SFTP_PASSWORD: ${{ secrets.SFTP_PASSWORD }}
+          SFTP_REMOTE_PATH: ${{ secrets.SFTP_REMOTE_PATH }}
+        run: |
+          lftp -c "
+            set sftp:auto-confirm yes;
+            set net:timeout 15;
+            set net:max-retries 3;
+            set net:reconnect-interval-base 5;
+            open sftp://$SFTP_HOST:${SFTP_PORT:-22};
+            user \"$SFTP_USERNAME\" \"$SFTP_PASSWORD\";
+            mirror -R --verbose --parallel=4 ./.output/public/ \"$SFTP_REMOTE_PATH/\";
+          "
+          # Pour que le serveur soit le miroir EXACT du build (supprime les vieux fichiers),
+          # ajouter --delete à la commande mirror ci-dessus. ⚠️ À n'activer que si
+          # SFTP_REMOTE_PATH pointe UNIQUEMENT vers le dossier du site.

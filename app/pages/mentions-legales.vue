@@ -12,7 +12,7 @@ useHead({
     <header class="legal-nav">
       <div class="wrap legal-nav-inner">
         <NuxtLink to="/" class="legal-brand" aria-label="ORIA Solutions, retour à l'accueil">
-          <img src="/assets/img/logo-horizontal.png" alt="ORIA Solutions" class="legal-brand-logo" />
+          <img src="/assets/img/logo-horizontal.webp" alt="ORIA Solutions" class="legal-brand-logo" />
         </NuxtLink>
         <NuxtLink to="/" class="legal-back">← Retour au site</NuxtLink>
       </div>
